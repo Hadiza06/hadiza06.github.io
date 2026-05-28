@@ -94,10 +94,6 @@
   .preview-wp { background:linear-gradient(135deg,#ddd6f3 0%,#f9c6d0 100%); }
   .preview-inkscape { background:linear-gradient(135deg,#fde8d0 0%,#f9c6d0 100%); }
   .preview-gimp { background:linear-gradient(135deg,#c8eedd 0%,#fde8d0 100%); }
-  .design-featured { background:var(--white); border-radius:24px; padding:2rem; border:1.5px solid rgba(221,214,243,.6); display:grid; grid-template-columns:1fr 1fr; gap:2rem; align-items:center; margin-bottom:1.4rem; }
-  .design-featured h3 { font-family:'Playfair Display',serif; font-size:1.3rem; margin-bottom:.8rem; }
-  .design-featured p { font-size:.88rem; color:var(--text-muted); line-height:1.7; margin-bottom:1.2rem; }
-  .design-preview-lg { border-radius:16px; height:180px; background:linear-gradient(135deg,#c8eedd 0%,#ddd6f3 50%,#f9c6d0 100%); display:flex; align-items:center; justify-content:center; font-family:'Playfair Display',serif; font-size:1.15rem; font-style:italic; color:var(--text); letter-spacing:.03em; }
   .timeline { position:relative; padding-left:2rem; }
   .timeline::before { content:''; position:absolute; left:0; top:.5rem; bottom:.5rem; width:2px; background:linear-gradient(to bottom,var(--rose),var(--lavender),var(--mint)); border-radius:2px; }
   .timeline-item { position:relative; margin-bottom:2.2rem; }
@@ -147,7 +143,7 @@
   <div class="blob blob-3"></div>
   <div class="hero-content">
     <div class="hero-tag">Alternance sept. 2026 · Toute la France</div>
-    <h1>Hadiza,<br><em>analyser pour comprendre,</em><br>comprendre pour agir.</h1>
+    <h1>Hadiza Hamidou Ba</h1>
     <p>2e année Informatique à ECE Paris · Spécialisation IA & Data Engineering · De la donnée brute à la décision concrète.</p>
     <div class="hero-btns">
       <a href="#projects" class="btn btn-primary">Voir mes projets</a>
@@ -193,10 +189,11 @@
   <div class="section-label">Projets techniques</div>
   <h2 class="section-title">Ce que j'ai construit</h2>
 
+  <!-- WMDP FEATURED -->
   <div class="featured-card">
     <div class="featured-badge">Projet phare · Hackathon TreeTech</div>
     <h3>WMDP Benchmark — LLM Safety & Ethics Evaluation</h3>
-    <p class="desc">Évaluation de la robustesse éthique et sécuritaire de 6 grands modèles de langage (Llama 3.1, Llama 3.3, Llama 4, GPT-OSS, Kimi K2, Qwen3) sur le benchmark WMDP, couvrant biosécurité, chimie et cybersécurité. Contribution originale : évaluation contextuelle testant si le cadrage social d'une requête (étudiant, chercheur, conseiller gouvernemental) modifie le comportement des modèles. Résultat : aucun framing n'a suffi à contourner les filtres de sécurité de manière systématique.</p>
+    <p class="desc">Évaluation de la robustesse éthique et sécuritaire de 6 grands modèles de langage (Llama 3.1, Llama 3.3, Llama 4, GPT-OSS, Kimi K2, Qwen3) sur le benchmark WMDP, couvrant biosécurité, chimie et cybersécurité. Contribution originale : évaluation contextuelle testant si le cadrage social d'une requête modifie le comportement des modèles. Résultat : aucun framing n'a suffi à contourner les filtres de sécurité de manière systématique.</p>
     <div class="featured-grid">
       <div class="featured-stat"><div class="stat-label">Modèles évalués</div><div class="stat-val">6 LLMs · Meta, OpenAI, Moonshot, Alibaba</div></div>
       <div class="featured-stat"><div class="stat-label">Meilleur modèle</div><div class="stat-val">Kimi K2 · 77.33% accuracy</div></div>
@@ -212,11 +209,24 @@
       <span class="project-tag pill-rose">AI Safety</span>
       <span class="project-tag pill-rose">LLMs</span>
     </div>
-    <a href="https://github.com/Hadiza06" target="_blank" class="project-link">Voir sur GitHub →</a>
+    <a href="https://github.com/Hadiza06/Hackaton-TreeTech" target="_blank" class="project-link">Voir sur GitHub →</a>
   </div>
 
   <div class="subsection-title">Data & IA</div>
   <div class="projects-grid" style="margin-bottom:2rem;">
+    <div class="project-card card-rose">
+      <div class="project-icon icon-rose">🎬</div>
+      <h3>Analyse exploratoire · Films TMDB</h3>
+      <p>Analyse de 4800 films avec Python, pandas et Seaborn : distribution des notes, évolution de la production par année, top 10 des films les mieux notés. Nettoyage de données et manipulation de JSON avec ast.literal_eval().</p>
+      <div class="project-tags">
+        <span class="project-tag pill-rose">Python</span>
+        <span class="project-tag pill-rose">pandas</span>
+        <span class="project-tag pill-rose">Matplotlib</span>
+        <span class="project-tag pill-rose">Seaborn</span>
+        <span class="project-tag pill-rose">Jupyter</span>
+      </div>
+      <a href="https://github.com/Hadiza06/analyse-films-tmdb" target="_blank" class="project-link">GitHub →</a>
+    </div>
     <div class="project-card card-lavender">
       <div class="project-icon icon-lavender">📊</div>
       <h3>Stack ELK · Visualisations</h3>
@@ -237,6 +247,28 @@
         <span class="project-tag pill-mint">Power BI</span>
       </div>
     </div>
+  </div>
+
+  <!-- MSP PROJECT -->
+  <div class="featured-card" style="border-color:var(--mint); border-width:1.5px;">
+    <div class="featured-badge" style="background:var(--mint);color:var(--mint-dark);">Projet MSP · Sécurité des données</div>
+    <h3>Sécurisation des Bases de Données de Santé TCIM</h3>
+    <p class="desc">Conception en équipe de 4 d'une solution complète de protection de données médicales, intégrant IA, cryptographie et gestion des accès. Classification automatique des données sensibles, chiffrement AES-256, architecture Zero Trust avec RBAC et audit trail, conformité RGPD/HDS sur données fictives.</p>
+    <div class="featured-grid">
+      <div class="featured-stat"><div class="stat-label">Chiffrement</div><div class="stat-val">AES-256 · gestion sécurisée des clés</div></div>
+      <div class="featured-stat"><div class="stat-label">Architecture</div><div class="stat-val">Zero Trust · RBAC · Audit trail</div></div>
+      <div class="featured-stat"><div class="stat-label">IA</div><div class="stat-val">Classification auto · Scikit-learn</div></div>
+      <div class="featured-stat"><div class="stat-label">Conformité</div><div class="stat-val">RGPD · HDS</div></div>
+    </div>
+    <div class="project-tags">
+      <span class="project-tag pill-mint">Python</span>
+      <span class="project-tag pill-mint">Flask</span>
+      <span class="project-tag pill-mint">scikit-learn</span>
+      <span class="project-tag pill-mint">AES-256</span>
+      <span class="project-tag pill-mint">RBAC</span>
+      <span class="project-tag pill-mint">RGPD</span>
+    </div>
+    <a href="https://github.com/Hadiza06/projet-msp-tcim" target="_blank" class="project-link">Voir sur GitHub →</a>
   </div>
 
   <div class="subsection-title">Développement</div>
@@ -282,20 +314,29 @@
 <section id="design">
   <div class="section-label">Design & Créations</div>
   <h2 class="section-title">Côté créatif</h2>
-  <div class="design-featured">
-    <div>
-      <h3>Floww · App bien-être musicale</h3>
-      <p>Projet UX/UI complet sur Figma : design system, wireframes basse fidélité, prototype interactif haute fidélité. Palette sage green & beige chaud, typographies Fraunces & DM Sans.</p>
-      <div class="skills-grid" style="margin-bottom:1.2rem;">
-        <span class="skill-pill pill-lavender">Figma</span>
-        <span class="skill-pill pill-mint">Design system</span>
-        <span class="skill-pill pill-rose">Prototype HF</span>
-        <span class="skill-pill pill-peach">UX Research</span>
-      </div>
-      <a href="#contact" class="btn btn-secondary" style="font-size:.83rem;">Voir le prototype →</a>
+
+  <!-- FLOWW FEATURED -->
+  <div class="featured-card" style="border-color:var(--lavender);">
+    <div class="featured-badge" style="background:var(--lavender);color:var(--lavender-dark);">Projet UX/UI complet · ECE Paris B2</div>
+    <h3>Floww · App bien-être musicale</h3>
+    <p class="desc">Application mobile de bien-être numérique centrée sur la musique. L'idée : plutôt que de parcourir une bibliothèque infinie, l'utilisateur répond à "Comment tu te sens ?" et reçoit une playlist adaptée à son état émotionnel. Système de design complet avec palette caméléon de 21 couleurs qui évolue selon 8 états émotionnels distincts. Logo créé sous Inkscape, prototype interactif haute fidélité sur Figma.</p>
+    <div class="featured-grid">
+      <div class="featured-stat"><div class="stat-label">Écrans</div><div class="stat-val">6 écrans · Splash, Onboarding, Accueil, Humeur, Explorer, Favoris</div></div>
+      <div class="featured-stat"><div class="stat-label">Design system</div><div class="stat-val">21 couleurs · 3 typographies · composants avec états</div></div>
+      <div class="featured-stat"><div class="stat-label">Logo</div><div class="stat-val">Inkscape · SVG vectoriel</div></div>
+      <div class="featured-stat"><div class="stat-label">Stack design</div><div class="stat-val">Figma · Inkscape · Phosphor Icons</div></div>
     </div>
-    <div class="design-preview-lg">Floww ✦</div>
+    <div class="project-tags">
+      <span class="project-tag pill-lavender">Figma</span>
+      <span class="project-tag pill-lavender">Design system</span>
+      <span class="project-tag pill-lavender">Prototype HF</span>
+      <span class="project-tag pill-lavender">UX Research</span>
+      <span class="project-tag pill-lavender">Inkscape</span>
+      <span class="project-tag pill-lavender">UX émotionnelle</span>
+    </div>
+    <a href="https://www.figma.com/proto/oZQihj5edhnS2BH0u56tk7/Projet?node-id=52-5&p=f&t=kaLzTMQ3UGwTU7Sj-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=52%3A5" target="_blank" class="project-link">Voir le prototype Figma →</a>
   </div>
+
   <div class="design-grid">
     <div class="design-card-simple">
       <div class="design-preview-sm preview-wp">WordPress ✦</div>
@@ -325,17 +366,19 @@
   <div class="wip-grid">
     <div class="wip-card">
       <div class="wip-badge">En cours</div>
-      <h3>Projet Python · Data</h3>
-      <p>Analyse et visualisation de données avec pandas, matplotlib et Streamlit. Dashboard interactif en cours de finalisation.</p>
-      <div class="wip-progress"><div class="wip-progress-bar" style="width:65%"></div></div>
-      <div class="project-tags"><span class="project-tag pill-peach">Python</span><span class="project-tag pill-peach">pandas</span><span class="project-tag pill-peach">Streamlit</span></div>
+      <h3>Anime Scraper · Python</h3>
+      <p>Web scraper Python pour extraire automatiquement des infos sur les animes depuis MyAnimeList : titres, notes, genres, synopsis. Un bon exercice de scraping et de manipulation de données.</p>
+      <div class="wip-progress"><div class="wip-progress-bar" style="width:55%"></div></div>
+      <div class="project-tags"><span class="project-tag pill-peach">Python</span><span class="project-tag pill-peach">BeautifulSoup</span><span class="project-tag pill-peach">Web scraping</span></div>
+      <a href="https://github.com/Hadiza06/Anime-scraper" target="_blank" class="project-link" style="margin-top:.4rem;display:inline-flex;">GitHub →</a>
     </div>
     <div class="wip-card">
       <div class="wip-badge">En cours</div>
-      <h3>Projet Web · À compléter</h3>
-      <p>Application web en développement. Architecture et fonctionnalités principales posées, interface en cours de finalisation.</p>
-      <div class="wip-progress"><div class="wip-progress-bar" style="width:40%"></div></div>
-      <div class="project-tags"><span class="project-tag pill-peach">HTML/CSS</span><span class="project-tag pill-peach">JavaScript</span></div>
+      <h3>Advent of Code 2025</h3>
+      <p>Solutions aux puzzles algorithmiques d'Advent of Code 2025 en Python. Un défi quotidien pour pratiquer la logique, les structures de données et l'optimisation.</p>
+      <div class="wip-progress"><div class="wip-progress-bar" style="width:20%"></div></div>
+      <div class="project-tags"><span class="project-tag pill-peach">Python</span><span class="project-tag pill-peach">Algorithmique</span><span class="project-tag pill-peach">Problem solving</span></div>
+      <a href="https://github.com/Hadiza06/Adventure-Of-Code" target="_blank" class="project-link" style="margin-top:.4rem;display:inline-flex;">GitHub →</a>
     </div>
     <div class="wip-card">
       <div class="wip-badge">En cours</div>
@@ -370,7 +413,7 @@
       <ul class="timeline-bullets">
         <li>Utilisation de DHIS2 pour la collecte et le suivi de données de santé publique</li>
         <li>Analyse de données pour orienter la prise de décision opérationnelle</li>
-        <li>Formation d'équipes locales à DHIS2 et à des outils d'IA, en adaptant le discours à des publics non-techniciens</li>
+        <li>Formation d'équipes locales à DHIS2 et à des outils d'IA</li>
       </ul>
     </div>
     <div class="timeline-item">
