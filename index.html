@@ -785,8 +785,7 @@ footer .tbc { display: inline-block; margin-top: 36px; font-family: var(--hand);
   var fb = document.querySelectorAll('.filters button'), ir = document.querySelectorAll('#idx-rows tr');
   function has(r, f) { return f === 'all' || r.getAttribute('data-c').split(' ').indexOf(f) > -1; }
   fb.forEach(function (b) {
-    var f = b.getAttribute('data-f'), n = 0; ir.forEach(function (r) { if (has(r, f)) n++; });
-    var sp = document.createElement('span'); sp.className = 'n'; sp.textContent = n; b.appendChild(sp);
+    var f = b.getAttribute('data-f');
     b.addEventListener('click', function () {
       ir.forEach(function (r) { r.hidden = !has(r, f); });
       fb.forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
