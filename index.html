@@ -184,7 +184,9 @@ svg .hand { font-family: var(--hand); font-size: 19px; fill: var(--accent); }
 .ch-head { grid-template-columns: auto 1fr 190px; }
 .ch-ill { grid-column: 3; grid-row: 1 / span 5; align-self: center; }
 .ch-ill svg { width: 100%; height: auto; }
-.ch-head .hook, .code-link { grid-column: 2; }
+.ch-head > .mono, .ch-head > h2, .ch-head .hook, .code-link { grid-column: 2; }
+.ch-head:not(:has(.ch-ill)) { grid-template-columns: auto 1fr; }
+@media (max-width: 640px) { .ch-head, .ch-head:not(:has(.ch-ill)) { grid-template-columns: 1fr; } .ch-head > * { grid-column: 1 !important; grid-row: auto !important; } .stamp { position: static; justify-self: start; margin-bottom: 14px; } }
 @media (max-width: 860px) { .ch-head { grid-template-columns: auto 1fr; } .ch-ill { display: none; } }
 .stamp { position: absolute; top: 14px; right: 18px; font-family: var(--mono); font-size: 0.66rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); border: 2px solid var(--accent); padding: 3px 9px; transform: rotate(4deg); z-index: 2; background: var(--white); }
 .stamp.alt { color: var(--ink); border-color: var(--ink); transform: rotate(-3deg); }
