@@ -104,6 +104,21 @@ header.top ul a:hover { color: var(--accent); }
 .toc .g { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); text-align: right; }
 @media (max-width: 640px) { .toc li a { grid-template-columns: 1fr; gap: 2px; } .toc .g { text-align: left; } }
 
+.idx { padding-top: 0; border-top: none; }
+.filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+.filters button { font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 7px 14px; border: 2px solid var(--ink); background: var(--white); color: var(--ink); cursor: pointer; box-shadow: 3px 3px 0 var(--ink); transition: transform .1s, box-shadow .1s; }
+.filters button .n { margin-left: 6px; color: var(--accent); }
+.filters button[aria-pressed="true"] { background: var(--ink); color: var(--paper); transform: translate(3px, 3px); box-shadow: none; }
+.idx-wrap { overflow-x: auto; border: var(--line); background: var(--white); }
+.idx-table { width: 100%; border-collapse: collapse; min-width: 620px; }
+.idx-table th { text-align: left; font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; background: var(--ink); color: var(--paper); font-weight: 500; padding: 8px 14px; }
+.idx-table td { padding: 11px 14px; border-bottom: 1px solid var(--tone); font-size: 0.92rem; vertical-align: baseline; }
+.idx-table tr[hidden] { display: none; }
+.idx-table tbody tr:hover { background: var(--paper); }
+.idx-table .pn { font-weight: 700; white-space: nowrap; }
+.idx-table .pn a { text-decoration-thickness: 2px; }
+.idx-table .pd { font-family: var(--mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent); white-space: nowrap; }
+.stg { font-family: var(--mono); font-size: 0.62rem; font-weight: 600; text-transform: uppercase; padding: 1px 7px; border: 1.5px solid var(--ink); margin-left: 4px; }
 /* Chapitres */
 .chapter { padding: 64px 0; border-top: var(--line); }
 .ch-head { display: grid; grid-template-columns: auto 1fr; gap: 4px 30px; align-items: center; margin-bottom: 10px; border: var(--line); background: var(--white); padding: 30px 34px; position: relative; overflow: hidden; }
@@ -258,6 +273,7 @@ footer .tbc { display: inline-block; margin-top: 36px; font-family: var(--hand);
       <ul>
         <li><a href="#parcours">Parcours</a></li>
         <li><a href="#sommaire">Sommaire</a></li>
+        <li><a href="#index">Tous les projets</a></li>
         <li><a href="#hors-serie">Hors-série</a></li>
         <li><a href="#fiche">Fiche technique</a></li>
         <li><a href="#contact">Contact</a></li>
@@ -370,7 +386,7 @@ footer .tbc { display: inline-block; margin-top: 36px; font-family: var(--hand);
       <div class="c-strip">
         <div class="panel"><b>2</b><span>stages, en France et au Mali</span></div>
         <div class="panel"><b class="acc">78 %</b><span>des fraudes repérées par mon modèle FraudDetect</span></div>
-        <div class="panel"><b>5</b><span>chapitres data dans ce volume</span></div>
+        <div class="panel"><b>20</b><span>projets, de la data au jeu vidéo</span></div>
         <div class="panel"><b>AWS</b><span>Cloud Practitioner, décembre 2025</span></div>
       </div>
     </div>
@@ -419,6 +435,48 @@ footer .tbc { display: inline-block; margin-top: 36px; font-family: var(--hand);
       <li><a href="#ch5"><span class="n">Chapitre 05</span><span class="t">Analyse TMDB<small>Ce que racontent des milliers de films</small></span><span class="g">Analyse de données</span></a></li>
       <li><a href="#hors-serie"><span class="n">Hors-série</span><span class="t">Jeux, web et design<small>Cozy Café, Orris, Loft &amp; Marbre et les autres</small></span><span class="g">Créatif</span></a></li>
           </ol>
+  </div>
+</section>
+
+
+<section class="toc idx" id="index">
+  <div class="wrap">
+    <div class="vol"><h2>Tous les projets</h2><span class="mono">Par domaine</span></div>
+    <div class="filters" role="group" aria-label="Filtrer les projets par domaine">
+      <button type="button" data-f="all" aria-pressed="true" id="fi-all">Tous</button>
+      <button type="button" data-f="data" aria-pressed="false" id="fi-data">Data</button>
+      <button type="button" data-f="ia" aria-pressed="false" id="fi-ia">IA et ML</button>
+      <button type="button" data-f="dev" aria-pressed="false" id="fi-dev">Développement</button>
+      <button type="button" data-f="jeu" aria-pressed="false" id="fi-jeu">Jeux</button>
+      <button type="button" data-f="design" aria-pressed="false" id="fi-design">Design</button>
+    </div>
+    <div class="idx-wrap"><table class="idx-table">
+      <thead><tr><th scope="col">Projet</th><th scope="col">En une phrase</th><th scope="col">Domaine</th></tr></thead>
+      <tbody id="idx-rows">
+          <tr data-c="ia"><td class="pn"><a href="#ch1">FraudDetect</a></td><td>Une IA qui repère 78 % des fraudes bancaires, avec une seule fausse alerte.</td><td class="pd">IA et ML</td></tr>
+          <tr data-c="ia"><td class="pn"><a href="#ch4">TreeTech</a></td><td>Comparaison de 6 IA conversationnelles sur une même grille.</td><td class="pd">IA et ML</td></tr>
+          <tr data-c="ia"><td class="pn"><a href="https://github.com/Hadiza06/pneumonia-detection">Détection de pneumonie</a> <span class="wip">en cours</span></td><td>Deep learning sur des images médicales.</td><td class="pd">IA et ML</td></tr>
+          <tr data-c="ia"><td class="pn">Émotions faciales</td><td>Reconnaître les émotions sur des visages, avec PyTorch.</td><td class="pd">IA et ML</td></tr>
+          <tr data-c="data"><td class="pn"><a href="#ch2">AeroTrack</a></td><td>Tableau de bord Power BI pour piloter trois usines aéronautiques.</td><td class="pd">Data</td></tr>
+          <tr data-c="data"><td class="pn"><a href="#ch3">ETL COVID-19</a></td><td>Chaîne automatique qui récupère chaque jour les données de 231 pays.</td><td class="pd">Data</td></tr>
+          <tr data-c="data"><td class="pn"><a href="#ch5">Analyse TMDB</a></td><td>Analyse exploratoire de milliers de films.</td><td class="pd">Data</td></tr>
+          <tr data-c="data"><td class="pn"><a href="https://github.com/Hadiza06/Anime-scraper">Anime Scraper</a></td><td>Récupérer des données sur le web avec Python.</td><td class="pd">Data</td></tr>
+          <tr data-c="data dev"><td class="pn"><a href="#parcours">Skills4Mind</a> <span class="stg">stage</span></td><td>Application web avec tableau de bord, en stage.</td><td class="pd">Data, Dev</td></tr>
+          <tr data-c="data"><td class="pn"><a href="#parcours">HISP Mali</a> <span class="stg">stage</span></td><td>Qualité des données de santé et tableaux de bord, en stage.</td><td class="pd">Data</td></tr>
+          <tr data-c="dev"><td class="pn"><a href="https://github.com/Hadiza06/devWeb">UniLearn</a></td><td>Plateforme e-learning en PHP et MySQL.</td><td class="pd">Dev</td></tr>
+          <tr data-c="dev"><td class="pn"><a href="https://github.com/Hadiza06/Flowly">Flowly</a></td><td>Application web Django.</td><td class="pd">Dev</td></tr>
+          <tr data-c="dev"><td class="pn"><a href="#hors-serie">Orris</a></td><td>Boutique en ligne WordPress, du catalogue au paiement.</td><td class="pd">Dev</td></tr>
+          <tr data-c="dev"><td class="pn"><a href="https://github.com/Hadiza06/Adventure-Of-Code">Advent of Code</a></td><td>Puzzles d'algorithmique en Python.</td><td class="pd">Dev</td></tr>
+          <tr data-c="jeu"><td class="pn"><a href="#hors-serie">Cozy Café</a> <span class="wip">en cours</span></td><td>Jeu de gestion de café sur Roblox.</td><td class="pd">Jeux</td></tr>
+          <tr data-c="jeu"><td class="pn"><a href="https://github.com/Hadiza06/Godot-first">Jeu de plateforme</a></td><td>Jeu 2D sous Godot.</td><td class="pd">Jeux</td></tr>
+          <tr data-c="jeu dev"><td class="pn"><a href="https://github.com/Hadiza06/Memory-Card">Memory Card</a></td><td>Jeu de mémoire en Java avec MySQL.</td><td class="pd">Jeux, Dev</td></tr>
+          <tr data-c="jeu dev"><td class="pn"><a href="https://github.com/Hadiza06/candy-crush-saga">CandyECE</a></td><td>Candy Crush en C, en équipe de 3.</td><td class="pd">Jeux, Dev</td></tr>
+          <tr data-c="design"><td class="pn"><a href="#hors-serie">Loft &amp; Marbre</a></td><td>Logo et application mobile sur Figma.</td><td class="pd">Design</td></tr>
+          <tr data-c="design"><td class="pn"><a href="https://github.com/Hadiza06/Floww">Floww</a></td><td>Application de bien-être musical, design system complet.</td><td class="pd">Design</td></tr>
+          <tr data-c="design"><td class="pn"><a href="#hors-serie">Sous les pixels</a></td><td>Affiche de sensibilisation au cyberharcèlement.</td><td class="pd">Design</td></tr>
+          <tr data-c="design"><td class="pn"><a href="#hors-serie">Variations de couleurs</a></td><td>Un paysage décliné en 6 ambiances.</td><td class="pd">Design</td></tr>
+      </tbody>
+    </table></div>
   </div>
 </section>
 
@@ -724,6 +782,16 @@ footer .tbc { display: inline-block; margin-top: 36px; font-family: var(--hand);
 <div class="lightbox" id="lb" role="dialog" aria-modal="true" aria-label="Image agrandie"><img id="lb-img" alt=""></div>
 <script>
 (function () {
+  var fb = document.querySelectorAll('.filters button'), ir = document.querySelectorAll('#idx-rows tr');
+  function has(r, f) { return f === 'all' || r.getAttribute('data-c').split(' ').indexOf(f) > -1; }
+  fb.forEach(function (b) {
+    var f = b.getAttribute('data-f'), n = 0; ir.forEach(function (r) { if (has(r, f)) n++; });
+    var sp = document.createElement('span'); sp.className = 'n'; sp.textContent = n; b.appendChild(sp);
+    b.addEventListener('click', function () {
+      ir.forEach(function (r) { r.hidden = !has(r, f); });
+      fb.forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+    });
+  });
   var lb = document.getElementById('lb'), lbi = document.getElementById('lb-img');
   document.querySelectorAll('img.shot, .extra img').forEach(function (img) {
     img.addEventListener('click', function () { lbi.src = img.src; lbi.alt = img.alt; lb.classList.add('open'); });
