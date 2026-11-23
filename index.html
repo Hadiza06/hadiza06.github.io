@@ -86,6 +86,11 @@ header.top ul a:hover { color: var(--accent); }
 .c-strip b { display: block; font-family: var(--display); font-weight: 400; font-size: 2rem; line-height: 1; }
 .c-strip b.acc { color: var(--accent); }
 .c-strip span { font-size: 0.86rem; color: var(--muted); }
+.teaser { display: flex; flex-direction: column; gap: 4px; text-decoration: none; transition: transform .12s, box-shadow .12s; }
+.teaser:hover { transform: translate(-3px, -3px); box-shadow: 6px 6px 0 var(--accent); }
+.teaser .tn { font-family: var(--mono); font-size: 0.66rem !important; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent) !important; }
+.teaser b { font-size: 1.7rem !important; margin-top: 2px; }
+.teaser i { font-style: normal; font-family: var(--mono); font-size: 0.72rem; margin-top: auto; padding-top: 6px; font-weight: 600; }
 .cta { display: inline-block; margin-top: 18px; align-self: flex-start; font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; background: var(--ink); color: var(--paper); padding: 12px 20px; box-shadow: 4px 4px 0 var(--accent); transition: transform .12s, box-shadow .12s; }
 .cta:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--accent); }
 @media (max-width: 860px) { .c-title, .c-side, .c-status { grid-column: 1 / -1; } .c-strip { grid-template-columns: 1fr 1fr; } }
@@ -104,7 +109,8 @@ header.top ul a:hover { color: var(--accent); }
 .toc .g { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); text-align: right; }
 @media (max-width: 640px) { .toc li a { grid-template-columns: 1fr; gap: 2px; } .toc .g { text-align: left; } }
 
-.idx { padding-top: 0; border-top: none; }
+.idx { padding: 64px 0; border-top: var(--line); }
+.all-link { display: inline-block; margin-top: 22px; font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; border-bottom: 2px solid var(--accent); padding-bottom: 3px; }
 .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
 .filters button { font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 7px 14px; border: 2px solid var(--ink); background: var(--white); color: var(--ink); cursor: pointer; box-shadow: 3px 3px 0 var(--ink); transition: transform .1s, box-shadow .1s; }
 .filters button .n { margin-left: 6px; color: var(--accent); }
@@ -172,6 +178,40 @@ svg .hand { font-family: var(--hand); font-size: 19px; fill: var(--accent); }
 .legend i { display: inline-block; width: 14px; height: 14px; border: 1.5px solid var(--ink); vertical-align: -2px; margin-right: 6px; }
 .legend i.a { background: var(--accent); }
 .legend i.h { background: repeating-linear-gradient(45deg, var(--ink) 0 1.2px, transparent 1.2px 4px); }
+
+
+/* Ambiances de chapitre */
+.ch-head { grid-template-columns: auto 1fr 190px; }
+.ch-ill { grid-column: 3; grid-row: 1 / span 5; align-self: center; }
+.ch-ill svg { width: 100%; height: auto; }
+.ch-head .hook, .code-link { grid-column: 2; }
+@media (max-width: 860px) { .ch-head { grid-template-columns: auto 1fr; } .ch-ill { display: none; } }
+.stamp { position: absolute; top: 14px; right: 18px; font-family: var(--mono); font-size: 0.66rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); border: 2px solid var(--accent); padding: 3px 9px; transform: rotate(4deg); z-index: 2; background: var(--white); }
+.stamp.alt { color: var(--ink); border-color: var(--ink); transform: rotate(-3deg); }
+.amb-enquete .ch-head { background-image: repeating-linear-gradient(0deg, transparent 0 27px, color-mix(in srgb, var(--accent) 14%, transparent) 27px 28px); }
+.amb-enquete .ch-head::after { content: ""; position: absolute; top: -2px; left: 46%; width: 90px; height: 16px; background: var(--tone); border: 2px solid var(--ink); border-top: none; }
+.amb-indus .ch-head { background-image: linear-gradient(color-mix(in srgb, var(--ink) 7%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in srgb, var(--ink) 7%, transparent) 1px, transparent 1px); background-size: 22px 22px; }
+.amb-lab .ch-head { background-image: radial-gradient(color-mix(in srgb, var(--ink) 22%, transparent) 1.2px, transparent 1.5px); background-size: 16px 16px; }
+.amb-exp .ch-head { background-image: linear-gradient(color-mix(in srgb, var(--accent) 10%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in srgb, var(--accent) 10%, transparent) 1px, transparent 1px); background-size: 10px 10px; }
+.amb-cine .ch-head { border-top: 14px solid var(--ink); border-bottom: 14px solid var(--ink); }
+.amb-cine .ch-head::after { content: ""; position: absolute; left: 0; right: 0; top: -11px; height: 8px; background: repeating-linear-gradient(90deg, var(--paper) 0 10px, transparent 10px 22px); }
+
+
+/* Fins de chapitre */
+.ch-end { display: flex; justify-content: flex-end; align-items: center; gap: 18px; margin-top: 28px; }
+.ch-end .pg { font-family: var(--hand); font-size: 1.3rem; color: var(--muted); margin-right: auto; }
+.next { display: grid; grid-template-columns: 1fr auto; gap: 2px 18px; align-items: center; text-decoration: none; border: var(--line); background: var(--white); padding: 14px 20px; box-shadow: 5px 5px 0 var(--ink); transition: transform .12s, box-shadow .12s; max-width: 440px; }
+.next:hover { transform: translate(-3px, -3px); box-shadow: 8px 8px 0 var(--accent); }
+.next .mono { color: var(--accent); font-weight: 600; }
+.next b { font-family: var(--display); font-weight: 400; font-size: 1.1rem; line-height: 1.2; grid-column: 1; }
+.next .arr { grid-column: 2; grid-row: 1 / span 2; font-family: var(--display); font-size: 2rem; transition: transform .2s; }
+.next:hover .arr { transform: translateX(6px); }
+@media (prefers-reduced-motion: no-preference) { .next .arr { animation: nudge 2.4s ease-in-out infinite; } @keyframes nudge { 50% { transform: translateX(5px); } } }
+/* Grille des fraudes qui se remplit */
+.unit.armed rect.f { fill: var(--white); }
+.unit.play rect.f { animation: fillA .25s forwards; animation-delay: calc(var(--i) * 14ms); }
+@keyframes fillA { to { fill: var(--accent); } }
+.easter { cursor: pointer; }
 
 /* Matrice */
 .matrix { display: grid; grid-template-columns: auto 1fr 1fr; gap: 6px; font-size: 0.85rem; }
@@ -271,11 +311,11 @@ footer .tbc { display: inline-block; margin-top: 36px; font-family: var(--hand);
     <a class="name" href="#top">Hadiza Hamidou BA<span>.</span></a>
     <nav aria-label="Navigation principale">
       <ul>
-        <li><a href="#parcours">Parcours</a></li>
         <li><a href="#sommaire">Sommaire</a></li>
-        <li><a href="#index">Tous les projets</a></li>
+        <li><a href="#parcours">Parcours</a></li>
+        <li><a href="#ch1">Chapitres</a></li>
         <li><a href="#hors-serie">Hors-série</a></li>
-        <li><a href="#fiche">Fiche technique</a></li>
+        <li><a href="#index">Tous les projets</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
@@ -355,7 +395,7 @@ footer .tbc { display: inline-block; margin-top: 36px; font-family: var(--hand);
   <!-- écran -->
   <rect x="128" y="232" width="144" height="92" fill="var(--white)" stroke="var(--ink)" stroke-width="3"/>
   <rect x="136" y="240" width="128" height="76" fill="url(#dots)"/>
-  <g font-family="IBM Plex Mono, monospace" font-size="9" fill="var(--ink)" font-weight="600"><text x="146" y="274" font-size="22" fill="var(--accent)">!false</text><text x="146" y="292">// drôle parce que</text><text x="146" y="304">// c'est vrai</text></g>
+  <g font-family="IBM Plex Mono, monospace" font-size="9" fill="var(--ink)" font-weight="600"><text id="egg" class="easter" x="146" y="274" font-size="22" fill="var(--accent)">!false</text><text x="146" y="292">// drôle parce que</text><text x="146" y="304">// c'est vrai</text></g>
   <rect x="188" y="324" width="24" height="14" fill="var(--ink)"/>
   <!-- post-it -->
   <g transform="rotate(-7 76 296)">
@@ -384,14 +424,33 @@ footer .tbc { display: inline-block; margin-top: 36px; font-family: var(--hand);
         <p><span class="dot" aria-hidden="true"></span>Disponible pour une alternance dès que possible ou en stage de 5 à 6 mois dès mars 2027</p>
       </div>
       <div class="c-strip">
-        <div class="panel"><b>2</b><span>stages, en France et au Mali</span></div>
-        <div class="panel"><b class="acc">1 sur 56 864</b><span>une seule fausse alerte de fraude, avec mon modèle FraudDetect</span></div>
-        <div class="panel"><b>Python</b><span>avec SQL et Power BI, mes outils du quotidien</span></div>
-        <div class="panel"><b>AWS</b><span>Cloud Practitioner, décembre 2025</span></div>
+        <a class="panel teaser" href="#ch1"><span class="tn">Chapitre 01</span><b class="acc">98 fraudes</b><span>cachées dans 56 962 paiements. Combien mon modèle en a-t-il trouvé ?</span><i>Lire →</i></a>
+        <a class="panel teaser" href="#ch2"><span class="tn">Chapitre 02</span><b>3 usines</b><span>et l'une produit plus de pièces défectueuses que les autres. Laquelle ?</span><i>Lire →</i></a>
+        <a class="panel teaser" href="#ch3"><span class="tn">Chapitre 03</span><b>231 pays</b><span>récupérés chaque jour en quelques secondes. Comment ?</span><i>Lire →</i></a>
+        <a class="panel teaser" href="#ch5"><span class="tn">Chapitre 05</span><b>Top 10</b><span>des films les mieux notés. Lequel arrive en tête ?</span><i>Lire →</i></a>
       </div>
     </div>
   </div>
 </section>
+
+
+<section class="toc" id="sommaire">
+  <div class="wrap">
+    <div class="vol"><h2>Sommaire</h2><span class="mono">Vol. 01, projets sélectionnés</span></div>
+    <ol>
+      <li><a href="#parcours"><span class="n">Prologue</span><span class="t">Parcours<small>Deux stages, à distance et au Mali</small></span><span class="g">Expérience</span></a></li>
+      <li><a href="#ch1"><span class="n">Chapitre 01</span><span class="t">FraudDetect<small>L'enquête sur les paiements frauduleux</small></span><span class="g">IA, machine learning</span></a></li>
+      <li><a href="#ch2"><span class="n">Chapitre 02</span><span class="t">AeroTrack<small>Piloter la production de trois usines</small></span><span class="g">Données, BI</span></a></li>
+      <li><a href="#ch3"><span class="n">Chapitre 03</span><span class="t">ETL COVID-19<small>La chaîne automatique des données</small></span><span class="g">Automatisation</span></a></li>
+      <li><a href="#ch4"><span class="n">Chapitre 04</span><span class="t">TreeTech<small>Le laboratoire des six IA</small></span><span class="g">IA générative</span></a></li>
+      <li><a href="#ch5"><span class="n">Chapitre 05</span><span class="t">Analyse TMDB<small>Ce que racontent des milliers de films</small></span><span class="g">Analyse de données</span></a></li>
+      <li><a href="#hors-serie"><span class="n">Hors-série</span><span class="t">Jeux, web et design<small>Cozy Café, Orris, Loft &amp; Marbre et les autres</small></span><span class="g">Créatif</span></a></li>
+            <li><a href="#fiche"><span class="n">Annexe</span><span class="t">Fiche technique<small>Compétences, formation et certifications</small></span><span class="g">Profil</span></a></li>
+    </ol>
+    <a class="all-link" href="#index">Voir tous mes projets, classés par domaine →</a>
+  </div>
+</section>
+
 
 <!-- Parcours -->
 <section class="chapter" id="parcours">
@@ -421,69 +480,23 @@ footer .tbc { display: inline-block; margin-top: 36px; font-family: var(--hand);
         <div class="tools" style="padding:0 22px 20px"><span>DHIS2</span><span>Tableaux de bord</span><span>Gestion de projet</span></div>
       </div>
     </div>
-  </div>
-</section>
-
-<section class="toc" id="sommaire">
-  <div class="wrap">
-    <div class="vol"><h2>Sommaire</h2><span class="mono">Vol. 01, projets sélectionnés</span></div>
-    <ol>
-      <li><a href="#ch1"><span class="n">Chapitre 01</span><span class="t">FraudDetect<small>L'enquête sur les paiements frauduleux</small></span><span class="g">IA, machine learning</span></a></li>
-      <li><a href="#ch2"><span class="n">Chapitre 02</span><span class="t">AeroTrack<small>Piloter la production de trois usines</small></span><span class="g">Données, BI</span></a></li>
-      <li><a href="#ch3"><span class="n">Chapitre 03</span><span class="t">ETL COVID-19<small>La chaîne automatique des données</small></span><span class="g">Automatisation</span></a></li>
-      <li><a href="#ch4"><span class="n">Chapitre 04</span><span class="t">TreeTech<small>Le laboratoire des six IA</small></span><span class="g">IA générative</span></a></li>
-      <li><a href="#ch5"><span class="n">Chapitre 05</span><span class="t">Analyse TMDB<small>Ce que racontent des milliers de films</small></span><span class="g">Analyse de données</span></a></li>
-      <li><a href="#hors-serie"><span class="n">Hors-série</span><span class="t">Jeux, web et design<small>Cozy Café, Orris, Loft &amp; Marbre et les autres</small></span><span class="g">Créatif</span></a></li>
-          </ol>
-  </div>
-</section>
-
-
-<section class="toc idx" id="index">
-  <div class="wrap">
-    <div class="vol"><h2>Tous les projets</h2><span class="mono">Par domaine</span></div>
-    <div class="filters" role="group" aria-label="Filtrer les projets par domaine">
-      <button type="button" data-f="all" aria-pressed="true" id="fi-all">Tous</button>
-      <button type="button" data-f="data" aria-pressed="false" id="fi-data">Data</button>
-      <button type="button" data-f="ia" aria-pressed="false" id="fi-ia">IA et ML</button>
-      <button type="button" data-f="dev" aria-pressed="false" id="fi-dev">Développement</button>
-      <button type="button" data-f="jeu" aria-pressed="false" id="fi-jeu">Jeux</button>
-      <button type="button" data-f="design" aria-pressed="false" id="fi-design">Design</button>
-    </div>
-    <div class="idx-wrap"><table class="idx-table">
-      <thead><tr><th scope="col">Projet</th><th scope="col">En une phrase</th><th scope="col">Domaine</th></tr></thead>
-      <tbody id="idx-rows">
-          <tr data-c="ia"><td class="pn"><a href="#ch1">FraudDetect</a></td><td>Une IA de détection de fraude bancaire, avec une seule fausse alerte sur 56 864 paiements.</td><td class="pd">IA et ML</td></tr>
-          <tr data-c="ia"><td class="pn"><a href="#ch4">TreeTech</a></td><td>Comparaison de 6 IA conversationnelles sur une même grille.</td><td class="pd">IA et ML</td></tr>
-          <tr data-c="ia"><td class="pn"><a href="https://github.com/Hadiza06/pneumonia-detection">Détection de pneumonie</a> <span class="wip">en cours</span></td><td>Deep learning sur des images médicales.</td><td class="pd">IA et ML</td></tr>
-          <tr data-c="ia"><td class="pn">Émotions faciales</td><td>Reconnaître les émotions sur des visages, avec PyTorch.</td><td class="pd">IA et ML</td></tr>
-          <tr data-c="data"><td class="pn"><a href="#ch2">AeroTrack</a></td><td>Tableau de bord Power BI pour piloter trois usines aéronautiques.</td><td class="pd">Data</td></tr>
-          <tr data-c="data"><td class="pn"><a href="#ch3">ETL COVID-19</a></td><td>Chaîne automatique qui récupère chaque jour les données de 231 pays.</td><td class="pd">Data</td></tr>
-          <tr data-c="data"><td class="pn"><a href="#ch5">Analyse TMDB</a></td><td>Analyse exploratoire de milliers de films.</td><td class="pd">Data</td></tr>
-          <tr data-c="data"><td class="pn"><a href="https://github.com/Hadiza06/Anime-scraper">Anime Scraper</a></td><td>Récupérer des données sur le web avec Python.</td><td class="pd">Data</td></tr>
-          <tr data-c="data dev"><td class="pn"><a href="#parcours">Skills4Mind</a> <span class="stg">stage</span></td><td>Application web avec tableau de bord, en stage.</td><td class="pd">Data, Dev</td></tr>
-          <tr data-c="data"><td class="pn"><a href="#parcours">HISP Mali</a> <span class="stg">stage</span></td><td>Qualité des données de santé et tableaux de bord, en stage.</td><td class="pd">Data</td></tr>
-          <tr data-c="dev"><td class="pn"><a href="https://github.com/Hadiza06/devWeb">UniLearn</a></td><td>Plateforme e-learning en PHP et MySQL.</td><td class="pd">Dev</td></tr>
-          <tr data-c="dev"><td class="pn"><a href="https://github.com/Hadiza06/Flowly">Flowly</a></td><td>Application web Django.</td><td class="pd">Dev</td></tr>
-          <tr data-c="dev"><td class="pn"><a href="#hors-serie">Orris</a></td><td>Boutique en ligne WordPress, du catalogue au paiement.</td><td class="pd">Dev</td></tr>
-          <tr data-c="dev"><td class="pn"><a href="https://github.com/Hadiza06/Adventure-Of-Code">Advent of Code</a></td><td>Puzzles d'algorithmique en Python.</td><td class="pd">Dev</td></tr>
-          <tr data-c="jeu"><td class="pn"><a href="#hors-serie">Cozy Café</a> <span class="wip">en cours</span></td><td>Jeu de gestion de café sur Roblox.</td><td class="pd">Jeux</td></tr>
-          <tr data-c="jeu"><td class="pn"><a href="https://github.com/Hadiza06/Godot-first">Jeu de plateforme</a></td><td>Jeu 2D sous Godot.</td><td class="pd">Jeux</td></tr>
-          <tr data-c="jeu dev"><td class="pn"><a href="https://github.com/Hadiza06/Memory-Card">Memory Card</a></td><td>Jeu de mémoire en Java avec MySQL.</td><td class="pd">Jeux, Dev</td></tr>
-          <tr data-c="jeu dev"><td class="pn"><a href="https://github.com/Hadiza06/candy-crush-saga">CandyECE</a></td><td>Candy Crush en C, en équipe de 3.</td><td class="pd">Jeux, Dev</td></tr>
-          <tr data-c="design"><td class="pn"><a href="#hors-serie">Loft &amp; Marbre</a></td><td>Logo et application mobile sur Figma.</td><td class="pd">Design</td></tr>
-          <tr data-c="design"><td class="pn"><a href="https://github.com/Hadiza06/Floww">Floww</a></td><td>Application de bien-être musical, design system complet.</td><td class="pd">Design</td></tr>
-          <tr data-c="design"><td class="pn"><a href="#hors-serie">Sous les pixels</a></td><td>Affiche de sensibilisation au cyberharcèlement.</td><td class="pd">Design</td></tr>
-          <tr data-c="design"><td class="pn"><a href="#hors-serie">Variations de couleurs</a></td><td>Un paysage décliné en 6 ambiances.</td><td class="pd">Design</td></tr>
-      </tbody>
-    </table></div>
+    <div class="ch-end"><span class="pg">p. 03</span><a class="next" href="#ch1"><span class="mono">Fin du prologue</span><b>Prochaine page, Chapitre 01, FraudDetect</b><span class="arr" aria-hidden="true">→</span></a></div>
   </div>
 </section>
 
 <!-- Chapitre 1 -->
-<section class="chapter" id="ch1">
+<section class="chapter amb-enquete" id="ch1">
   <div class="wrap">
-    <div class="ch-head"><div class="ch-num">01</div><div class="mono">Chapitre 01, dossier d'enquête</div><h2>FraudDetect<small>Repérer les fraudes cachées dans des dizaines de milliers de paiements.</small></h2><p class="hook">Sur 56 962 paiements, 98 fraudes se cachent. Combien le modèle va-t-il en attraper ?</p><a class="code-link" href="https://github.com/Hadiza06/FraudDetect">Voir le code sur GitHub →</a></div>
+    <div class="ch-head"><span class="stamp">Dossier confidentiel</span><div class="ch-ill"><svg viewBox="0 0 200 150" aria-hidden="true">
+<g stroke="var(--ink)" stroke-width="2">
+<rect x="14" y="20" width="110" height="26" fill="var(--white)"/><rect x="14" y="54" width="110" height="26" fill="var(--accent)"/><rect x="14" y="88" width="110" height="26" fill="var(--white)"/>
+</g>
+<g fill="var(--ink)"><rect x="22" y="30" width="40" height="6"/><rect x="22" y="98" width="52" height="6"/><rect x="96" y="30" width="20" height="6"/><rect x="96" y="98" width="20" height="6"/></g>
+<g fill="var(--white)"><rect x="22" y="64" width="46" height="6"/><rect x="96" y="64" width="20" height="6"/></g>
+<circle cx="128" cy="68" r="34" fill="var(--white)" fill-opacity="0.55" stroke="var(--ink)" stroke-width="5"/>
+<line x1="152" y1="92" x2="186" y2="130" stroke="var(--ink)" stroke-width="10" stroke-linecap="round"/>
+<text x="118" y="80" font-family="Dela Gothic One, sans-serif" font-size="34" fill="var(--ink)">?</text>
+</svg></div><div class="ch-num">01</div><div class="mono">Chapitre 01, dossier d'enquête</div><h2>FraudDetect<small>Repérer les fraudes cachées dans des dizaines de milliers de paiements.</small></h2><p class="hook">Sur 56 962 paiements, 98 fraudes se cachent. Combien le modèle va-t-il en attraper ?</p><a class="code-link" href="https://github.com/Hadiza06/FraudDetect">Voir le code sur GitHub →</a></div>
     <div class="page">
       <div class="panel has-tag s5"><span class="tag">Le dossier</span>
         <p>Des paiements par carte bancaire, presque tous normaux. Les fraudes représentent <b>moins de 0,2 %</b> des transactions.</p>
@@ -505,9 +518,9 @@ footer .tbc { display: inline-block; margin-top: 36px; font-family: var(--hand);
       </div>
       <div class="panel has-tag s8"><span class="tag">Résultats</span>
         <div class="big">76 / 98<small>fraudes repérées, soit 78 %</small></div>
-        <div style="margin-top:16px"><svg viewBox="-2 -2 368 186" role="img" aria-label="Sur 98 fraudes, 76 repérées et 22 manquées">
+        <div style="margin-top:16px"><svg class="unit" viewBox="-2 -2 368 186" role="img" aria-label="Sur 98 fraudes, 76 repérées et 22 manquées">
 <defs><pattern id="hatch" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="5" stroke="var(--ink)" stroke-width="1.2"/></pattern></defs>
-<rect x="0" y="0" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="26" y="0" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="52" y="0" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="78" y="0" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="104" y="0" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="130" y="0" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="156" y="0" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="182" y="0" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="208" y="0" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="234" y="0" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="260" y="0" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="286" y="0" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="312" y="0" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="338" y="0" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="0" y="26" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="26" y="26" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="52" y="26" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="78" y="26" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="104" y="26" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="130" y="26" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="156" y="26" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="182" y="26" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="208" y="26" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="234" y="26" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="260" y="26" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="286" y="26" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="312" y="26" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="338" y="26" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="0" y="52" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="26" y="52" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="52" y="52" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="78" y="52" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="104" y="52" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="130" y="52" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="156" y="52" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="182" y="52" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="208" y="52" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="234" y="52" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="260" y="52" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="286" y="52" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="312" y="52" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="338" y="52" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="0" y="78" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="26" y="78" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="52" y="78" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="78" y="78" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="104" y="78" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="130" y="78" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="156" y="78" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="182" y="78" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="208" y="78" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="234" y="78" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="260" y="78" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="286" y="78" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="312" y="78" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="338" y="78" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="0" y="104" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="26" y="104" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="52" y="104" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="78" y="104" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="104" y="104" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="130" y="104" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="156" y="104" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="182" y="104" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="208" y="104" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="234" y="104" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="260" y="104" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="286" y="104" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="312" y="104" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="338" y="104" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="0" y="130" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="26" y="130" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="52" y="130" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="78" y="130" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="104" y="130" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="130" y="130" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="156" y="130" width="20" height="20" fill="url(#hatch)" stroke="var(--ink)" stroke-width="1.5"/><rect x="182" y="130" width="20" height="20" fill="url(#hatch)" stroke="var(--ink)" stroke-width="1.5"/><rect x="208" y="130" width="20" height="20" fill="url(#hatch)" stroke="var(--ink)" stroke-width="1.5"/><rect x="234" y="130" width="20" height="20" fill="url(#hatch)" stroke="var(--ink)" stroke-width="1.5"/><rect x="260" y="130" width="20" height="20" fill="url(#hatch)" stroke="var(--ink)" stroke-width="1.5"/><rect x="286" y="130" width="20" height="20" fill="url(#hatch)" stroke="var(--ink)" stroke-width="1.5"/><rect x="312" y="130" width="20" height="20" fill="url(#hatch)" stroke="var(--ink)" stroke-width="1.5"/><rect x="338" y="130" width="20" height="20" fill="url(#hatch)" stroke="var(--ink)" stroke-width="1.5"/><rect x="0" y="156" width="20" height="20" fill="url(#hatch)" stroke="var(--ink)" stroke-width="1.5"/><rect x="26" y="156" width="20" height="20" fill="url(#hatch)" stroke="var(--ink)" stroke-width="1.5"/><rect x="52" y="156" width="20" height="20" fill="url(#hatch)" stroke="var(--ink)" stroke-width="1.5"/><rect x="78" y="156" width="20" height="20" fill="url(#hatch)" stroke="var(--ink)" stroke-width="1.5"/><rect x="104" y="156" width="20" height="20" fill="url(#hatch)" stroke="var(--ink)" stroke-width="1.5"/><rect x="130" y="156" width="20" height="20" fill="url(#hatch)" stroke="var(--ink)" stroke-width="1.5"/><rect x="156" y="156" width="20" height="20" fill="url(#hatch)" stroke="var(--ink)" stroke-width="1.5"/><rect x="182" y="156" width="20" height="20" fill="url(#hatch)" stroke="var(--ink)" stroke-width="1.5"/><rect x="208" y="156" width="20" height="20" fill="url(#hatch)" stroke="var(--ink)" stroke-width="1.5"/><rect x="234" y="156" width="20" height="20" fill="url(#hatch)" stroke="var(--ink)" stroke-width="1.5"/><rect x="260" y="156" width="20" height="20" fill="url(#hatch)" stroke="var(--ink)" stroke-width="1.5"/><rect x="286" y="156" width="20" height="20" fill="url(#hatch)" stroke="var(--ink)" stroke-width="1.5"/><rect x="312" y="156" width="20" height="20" fill="url(#hatch)" stroke="var(--ink)" stroke-width="1.5"/><rect x="338" y="156" width="20" height="20" fill="url(#hatch)" stroke="var(--ink)" stroke-width="1.5"/></svg></div>
+<rect class="f" style="--i:0" x="0" y="0" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect class="f" style="--i:1" x="26" y="0" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect class="f" style="--i:2" x="52" y="0" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect class="f" style="--i:3" x="78" y="0" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect class="f" style="--i:4" x="104" y="0" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect class="f" style="--i:5" x="130" y="0" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect class="f" style="--i:6" x="156" y="0" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect class="f" style="--i:7" x="182" y="0" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect class="f" style="--i:8" x="208" y="0" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect class="f" style="--i:9" x="234" y="0" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect class="f" style="--i:10" x="260" y="0" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect class="f" style="--i:11" x="286" y="0" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect class="f" style="--i:12" x="312" y="0" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect class="f" style="--i:13" x="338" y="0" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect class="f" style="--i:14" x="0" y="26" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect class="f" style="--i:15" x="26" y="26" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect class="f" style="--i:16" x="52" y="26" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect class="f" style="--i:17" x="78" y="26" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect class="f" style="--i:18" x="104" y="26" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect class="f" style="--i:19" x="130" y="26" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect class="f" style="--i:20" x="156" y="26" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect class="f" style="--i:21" x="182" y="26" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect class="f" style="--i:22" x="208" y="26" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect class="f" style="--i:23" x="234" y="26" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect class="f" style="--i:24" x="260" y="26" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect class="f" style="--i:25" x="286" y="26" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect class="f" style="--i:26" x="312" y="26" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect class="f" style="--i:27" x="338" y="26" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect class="f" style="--i:28" x="0" y="52" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect class="f" style="--i:29" x="26" y="52" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect class="f" style="--i:30" x="52" y="52" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect class="f" style="--i:31" x="78" y="52" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect class="f" style="--i:32" x="104" y="52" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect class="f" style="--i:33" x="130" y="52" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect class="f" style="--i:34" x="156" y="52" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect class="f" style="--i:35" x="182" y="52" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect class="f" style="--i:36" x="208" y="52" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect class="f" style="--i:37" x="234" y="52" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect class="f" style="--i:38" x="260" y="52" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect class="f" style="--i:39" x="286" y="52" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect class="f" style="--i:40" x="312" y="52" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect class="f" style="--i:41" x="338" y="52" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect class="f" style="--i:42" x="0" y="78" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect class="f" style="--i:43" x="26" y="78" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect class="f" style="--i:44" x="52" y="78" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect class="f" style="--i:45" x="78" y="78" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect class="f" style="--i:46" x="104" y="78" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect class="f" style="--i:47" x="130" y="78" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect class="f" style="--i:48" x="156" y="78" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect class="f" style="--i:49" x="182" y="78" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect class="f" style="--i:50" x="208" y="78" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect class="f" style="--i:51" x="234" y="78" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect class="f" style="--i:52" x="260" y="78" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect class="f" style="--i:53" x="286" y="78" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect class="f" style="--i:54" x="312" y="78" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect class="f" style="--i:55" x="338" y="78" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect class="f" style="--i:56" x="0" y="104" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect class="f" style="--i:57" x="26" y="104" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect class="f" style="--i:58" x="52" y="104" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect class="f" style="--i:59" x="78" y="104" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect class="f" style="--i:60" x="104" y="104" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect class="f" style="--i:61" x="130" y="104" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect class="f" style="--i:62" x="156" y="104" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect class="f" style="--i:63" x="182" y="104" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect class="f" style="--i:64" x="208" y="104" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect class="f" style="--i:65" x="234" y="104" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect class="f" style="--i:66" x="260" y="104" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect class="f" style="--i:67" x="286" y="104" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect class="f" style="--i:68" x="312" y="104" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect class="f" style="--i:69" x="338" y="104" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect class="f" style="--i:70" x="0" y="130" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect class="f" style="--i:71" x="26" y="130" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect class="f" style="--i:72" x="52" y="130" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect class="f" style="--i:73" x="78" y="130" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect class="f" style="--i:74" x="104" y="130" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect class="f" style="--i:75" x="130" y="130" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="156" y="130" width="20" height="20" fill="url(#hatch)" stroke="var(--ink)" stroke-width="1.5"/><rect x="182" y="130" width="20" height="20" fill="url(#hatch)" stroke="var(--ink)" stroke-width="1.5"/><rect x="208" y="130" width="20" height="20" fill="url(#hatch)" stroke="var(--ink)" stroke-width="1.5"/><rect x="234" y="130" width="20" height="20" fill="url(#hatch)" stroke="var(--ink)" stroke-width="1.5"/><rect x="260" y="130" width="20" height="20" fill="url(#hatch)" stroke="var(--ink)" stroke-width="1.5"/><rect x="286" y="130" width="20" height="20" fill="url(#hatch)" stroke="var(--ink)" stroke-width="1.5"/><rect x="312" y="130" width="20" height="20" fill="url(#hatch)" stroke="var(--ink)" stroke-width="1.5"/><rect x="338" y="130" width="20" height="20" fill="url(#hatch)" stroke="var(--ink)" stroke-width="1.5"/><rect x="0" y="156" width="20" height="20" fill="url(#hatch)" stroke="var(--ink)" stroke-width="1.5"/><rect x="26" y="156" width="20" height="20" fill="url(#hatch)" stroke="var(--ink)" stroke-width="1.5"/><rect x="52" y="156" width="20" height="20" fill="url(#hatch)" stroke="var(--ink)" stroke-width="1.5"/><rect x="78" y="156" width="20" height="20" fill="url(#hatch)" stroke="var(--ink)" stroke-width="1.5"/><rect x="104" y="156" width="20" height="20" fill="url(#hatch)" stroke="var(--ink)" stroke-width="1.5"/><rect x="130" y="156" width="20" height="20" fill="url(#hatch)" stroke="var(--ink)" stroke-width="1.5"/><rect x="156" y="156" width="20" height="20" fill="url(#hatch)" stroke="var(--ink)" stroke-width="1.5"/><rect x="182" y="156" width="20" height="20" fill="url(#hatch)" stroke="var(--ink)" stroke-width="1.5"/><rect x="208" y="156" width="20" height="20" fill="url(#hatch)" stroke="var(--ink)" stroke-width="1.5"/><rect x="234" y="156" width="20" height="20" fill="url(#hatch)" stroke="var(--ink)" stroke-width="1.5"/><rect x="260" y="156" width="20" height="20" fill="url(#hatch)" stroke="var(--ink)" stroke-width="1.5"/><rect x="286" y="156" width="20" height="20" fill="url(#hatch)" stroke="var(--ink)" stroke-width="1.5"/><rect x="312" y="156" width="20" height="20" fill="url(#hatch)" stroke="var(--ink)" stroke-width="1.5"/><rect x="338" y="156" width="20" height="20" fill="url(#hatch)" stroke="var(--ink)" stroke-width="1.5"/></svg></div>
         <div class="legend"><span><i class="a"></i>Fraude repérée (76)</span><span><i class="h"></i>Fraude manquée (22)</span></div>
         <div class="fig"><b>Fig. 1.1</b> Chaque case est une fraude réelle du jeu de test</div>
       </div>
@@ -530,13 +543,21 @@ footer .tbc { display: inline-block; margin-top: 36px; font-family: var(--hand);
         </div>
       </div>
     </div>
+    <div class="ch-end"><span class="pg">p. 04</span><a class="next" href="#ch2"><span class="mono">Fin du chapitre 01</span><b>Prochaine page, Chapitre 02, AeroTrack</b><span class="arr" aria-hidden="true">→</span></a></div>
   </div>
 </section>
 
 <!-- Chapitre 2 -->
-<section class="chapter tone" id="ch2">
+<section class="chapter amb-indus tone" id="ch2">
   <div class="wrap">
-    <div class="ch-head"><div class="ch-num">02</div><div class="mono">Chapitre 02, rapport de production</div><h2>AeroTrack<small>Un tableau de bord pour piloter trois usines aéronautiques.</small></h2><p class="hook">Trois usines, trois pièces, et près d'un tiers de la production en retard.</p><a class="code-link" href="https://github.com/Hadiza06/Aerotrack">Voir le code sur GitHub →</a></div>
+    <div class="ch-head"><span class="stamp alt">Rapport n° 02</span><div class="ch-ill"><svg viewBox="0 0 200 150" aria-hidden="true">
+<g stroke="var(--ink)" stroke-width="2.2" stroke-linejoin="round">
+<path d="M100,12 C106,12 108,22 108,34 L108,58 L172,84 L172,96 L108,82 L106,118 L126,130 L126,138 L100,132 L74,138 L74,130 L94,118 L92,82 L28,96 L28,84 L92,58 L92,34 C92,22 94,12 100,12 Z" fill="var(--white)"/>
+<path d="M142,72 L150,75 L150,92 L142,90 Z" fill="var(--accent)"/><path d="M58,72 L50,75 L50,92 L58,90 Z" fill="var(--accent)"/>
+</g>
+<g transform="translate(160,30)"><circle r="14" fill="var(--tone)" stroke="var(--ink)" stroke-width="2"/><circle r="5" fill="var(--white)" stroke="var(--ink)" stroke-width="2"/>
+<g stroke="var(--ink)" stroke-width="4"><line x1="0" y1="-19" x2="0" y2="-13"/><line x1="0" y1="13" x2="0" y2="19"/><line x1="-19" y1="0" x2="-13" y2="0"/><line x1="13" y1="0" x2="19" y2="0"/></g></g>
+</svg></div><div class="ch-num">02</div><div class="mono">Chapitre 02, rapport de production</div><h2>AeroTrack<small>Un tableau de bord pour piloter trois usines aéronautiques.</small></h2><p class="hook">Trois usines, trois pièces, et près d'un tiers de la production en retard.</p><a class="code-link" href="https://github.com/Hadiza06/Aerotrack">Voir le code sur GitHub →</a></div>
     <div class="page">
       <div class="panel has-tag s5"><span class="tag">Le dossier</span>
         <p>Trois sites, <b>Bordeaux, Tarnos et Gennevilliers</b>, fabriquent trois pièces, des harnais électriques, des nacelles et des aubes de turbine.</p>
@@ -581,13 +602,19 @@ footer .tbc { display: inline-block; margin-top: 36px; font-family: var(--hand);
         </div>
       </div>
     </div>
+    <div class="ch-end"><span class="pg">p. 05</span><a class="next" href="#ch3"><span class="mono">Fin du chapitre 02</span><b>Prochaine page, Chapitre 03, ETL COVID-19</b><span class="arr" aria-hidden="true">→</span></a></div>
   </div>
 </section>
 
 <!-- Chapitre 3 -->
-<section class="chapter" id="ch3">
+<section class="chapter amb-lab" id="ch3">
   <div class="wrap">
-    <div class="ch-head"><div class="ch-num">03</div><div class="mono">Chapitre 03, schéma de flux</div><h2>ETL COVID-19<small>Une chaîne automatique, de la source en ligne jusqu'au tableau de bord.</small></h2><p class="hook">Des données brutes en entrée, un tableau de bord propre en sortie, et une trace de chaque étape.</p><a class="code-link" href="https://github.com/Hadiza06/ETL-Covid">Voir le code sur GitHub →</a></div>
+    <div class="ch-head"><div class="ch-ill"><svg viewBox="0 0 200 150" aria-hidden="true">
+<g fill="none" stroke="var(--ink)" stroke-width="2"><path d="M30,40 L80,40 L80,75 L130,75 L130,110 L172,110"/><path d="M80,40 L80,20 L150,20 L150,75 L130,75"/></g>
+<g stroke="var(--ink)" stroke-width="2"><circle cx="30" cy="40" r="11" fill="var(--white)"/><circle cx="80" cy="40" r="11" fill="var(--tone)"/><circle cx="150" cy="20" r="8" fill="var(--white)"/><circle cx="130" cy="75" r="11" fill="var(--tone)"/><circle cx="172" cy="110" r="14" fill="var(--accent)"/></g>
+<g fill="var(--accent)"><rect x="50" y="36" width="8" height="8"/><rect x="100" y="71" width="8" height="8"/><rect x="146" y="106" width="8" height="8"/></g>
+<text x="14" y="138" font-family="IBM Plex Mono, monospace" font-size="11" font-weight="600" fill="var(--ink)">[INFO] 231 lignes</text>
+</svg></div><div class="ch-num">03</div><div class="mono">Chapitre 03, schéma de flux</div><h2>ETL COVID-19<small>Une chaîne automatique, de la source en ligne jusqu'au tableau de bord.</small></h2><p class="hook">Des données brutes en entrée, un tableau de bord propre en sortie, et une trace de chaque étape.</p><a class="code-link" href="https://github.com/Hadiza06/ETL-Covid">Voir le code sur GitHub →</a></div>
     <div class="page">
       <div class="panel has-tag s6"><span class="tag">Le dossier</span>
         <p>Les chiffres du COVID-19 sont publiés en ligne sous une forme brute, difficile à lire et à analyser directement.</p>
@@ -624,13 +651,21 @@ footer .tbc { display: inline-block; margin-top: 36px; font-family: var(--hand);
         <div class="tools"><span>Python</span><span>Requests</span><span>Pandas</span><span>API</span><span>JSON</span><span>logging</span><span>Planificateur de tâches</span><span>Power BI</span></div>
       </div>
     </div>
+    <div class="ch-end"><span class="pg">p. 06</span><a class="next" href="#ch4"><span class="mono">Fin du chapitre 03</span><b>Prochaine page, Chapitre 04, TreeTech</b><span class="arr" aria-hidden="true">→</span></a></div>
   </div>
 </section>
 
 <!-- Chapitre 4 -->
-<section class="chapter tone" id="ch4">
+<section class="chapter amb-exp tone" id="ch4">
   <div class="wrap">
-    <div class="ch-head"><div class="ch-num">04</div><div class="mono">Chapitre 04, fiche d'expérience</div><h2>TreeTech<small>Six IA conversationnelles passées au même test.</small></h2><p class="hook">Six IA, une seule grille d'évaluation, et un temps limité pour les départager.</p><a class="code-link" href="https://github.com/Hadiza06/Hackaton-TreeTech">Voir le code sur GitHub →</a></div>
+    <div class="ch-head"><div class="ch-ill"><svg viewBox="0 0 200 150" aria-hidden="true">
+<g stroke="var(--ink)" stroke-width="2.2" stroke-linejoin="round">
+<path d="M30,20 L50,20 M34,20 L34,70 L18,128 L66,128 L50,70 L50,20" fill="var(--white)"/><path d="M24,108 L60,108 L66,128 L18,128 Z" fill="var(--tone)"/>
+<path d="M88,30 L112,30 M92,30 L92,80 L76,128 L128,128 L112,80 L112,30" fill="var(--white)"/><path d="M82,96 L122,96 L128,128 L76,128 Z" fill="var(--accent)"/>
+<path d="M146,20 L166,20 M150,20 L150,70 L134,128 L182,128 L166,70 L166,20" fill="var(--white)"/><path d="M140,114 L176,114 L182,128 L134,128 Z" fill="var(--tone)"/>
+</g>
+<g fill="var(--white)" stroke="var(--ink)" stroke-width="1.5"><circle cx="100" cy="84" r="4"/><circle cx="106" cy="72" r="3"/><circle cx="97" cy="62" r="2.5"/></g>
+</svg></div><div class="ch-num">04</div><div class="mono">Chapitre 04, fiche d'expérience</div><h2>TreeTech<small>Six IA conversationnelles passées au même test.</small></h2><p class="hook">Six IA, une seule grille d'évaluation, et un temps limité pour les départager.</p><a class="code-link" href="https://github.com/Hadiza06/Hackaton-TreeTech">Voir le code sur GitHub →</a></div>
     <div class="page">
       <div class="panel has-tag s5"><span class="tag">Le dossier</span>
         <p>Il existe de nombreuses IA capables de rédiger et de répondre à des questions, comme ChatGPT. Elles ne se valent pas toutes selon l'usage.</p>
@@ -644,13 +679,24 @@ footer .tbc { display: inline-block; margin-top: 36px; font-family: var(--hand);
         <div class="fig"><b>Fig. 4.1</b> Six modèles, une seule grille d'évaluation</div>
       </div>
     </div>
+    <div class="ch-end"><span class="pg">p. 07</span><a class="next" href="#ch5"><span class="mono">Fin du chapitre 04</span><b>Prochaine page, Chapitre 05, Analyse TMDB</b><span class="arr" aria-hidden="true">→</span></a></div>
   </div>
 </section>
 
 <!-- Chapitre 5 -->
-<section class="chapter" id="ch5">
+<section class="chapter amb-cine" id="ch5">
   <div class="wrap">
-    <div class="ch-head"><div class="ch-num">05</div><div class="mono">Chapitre 05, analyse exploratoire</div><h2>Analyse TMDB<small>Ce que racontent des milliers de films.</small></h2><p class="hook">Des milliers de films, trois questions, trois graphiques pour y répondre.</p><a class="code-link" href="https://github.com/Hadiza06/analyse-films-tmdb">Voir le code sur GitHub →</a></div>
+    <div class="ch-head"><div class="ch-ill"><svg viewBox="0 0 200 150" aria-hidden="true">
+<g stroke="var(--ink)" stroke-width="2.2">
+<rect x="30" y="58" width="140" height="76" fill="var(--white)"/>
+<g transform="rotate(-14 30 58)"><rect x="30" y="34" width="140" height="22" fill="var(--ink)"/>
+<g fill="var(--white)" stroke="none"><path d="M44,34 L60,34 L48,56 L32,56 Z"/><path d="M84,34 L100,34 L88,56 L72,56 Z"/><path d="M124,34 L140,34 L128,56 L112,56 Z"/></g></g>
+<rect x="30" y="58" width="140" height="16" fill="var(--ink)"/>
+</g>
+<g fill="var(--white)"><path d="M44,58 L60,58 L52,74 L36,74 Z"/><path d="M84,58 L100,58 L92,74 L76,74 Z"/><path d="M124,58 L140,58 L132,74 L116,74 Z"/></g>
+<text x="44" y="106" font-family="IBM Plex Mono, monospace" font-size="12" font-weight="600" fill="var(--ink)">TMDB, prise 05</text>
+<text x="44" y="124" font-family="Dela Gothic One, sans-serif" font-size="14" fill="var(--accent)">★ 8,5</text>
+</svg></div><div class="ch-num">05</div><div class="mono">Chapitre 05, analyse exploratoire</div><h2>Analyse TMDB<small>Ce que racontent des milliers de films.</small></h2><p class="hook">Des milliers de films, trois questions, trois graphiques pour y répondre.</p><a class="code-link" href="https://github.com/Hadiza06/analyse-films-tmdb">Voir le code sur GitHub →</a></div>
     <div class="page">
       <div class="panel has-tag s4"><span class="tag">Le dossier</span>
         <p>La base TMDB rassemble des milliers de films avec leur date de sortie et leurs notes. Brute, elle ne raconte rien.</p>
@@ -667,6 +713,7 @@ footer .tbc { display: inline-block; margin-top: 36px; font-family: var(--hand);
         <svg viewBox="0 0 600 272" role="img" aria-label="Top 10 des films les mieux notés, The Shawshank Redemption en tête avec 8,5"><text x="180" y="16" class="val" text-anchor="end">1. The Shawshank Redemption</text><rect x="190" y="3" width="306.0" height="18" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><text x="504.0" y="17" class="lab">8,5</text><text x="180" y="43" class="val" text-anchor="end">2. The Godfather</text><rect x="190" y="30" width="302.4" height="18" fill="var(--tone)" stroke="var(--ink)" stroke-width="1.5"/><text x="500.4" y="44" class="lab">8,4</text><text x="180" y="70" class="val" text-anchor="end">3. Fight Club</text><rect x="190" y="57" width="298.8" height="18" fill="var(--tone)" stroke="var(--ink)" stroke-width="1.5"/><text x="496.8" y="71" class="lab">8,3</text><text x="180" y="97" class="val" text-anchor="end">4. Schindler&#39;s List</text><rect x="190" y="84" width="298.8" height="18" fill="var(--tone)" stroke="var(--ink)" stroke-width="1.5"/><text x="496.8" y="98" class="lab">8,3</text><text x="180" y="124" class="val" text-anchor="end">5. Spirited Away</text><rect x="190" y="111" width="298.8" height="18" fill="var(--tone)" stroke="var(--ink)" stroke-width="1.5"/><text x="496.8" y="125" class="lab">8,3</text><text x="180" y="151" class="val" text-anchor="end">6. The Godfather: Part II</text><rect x="190" y="138" width="298.8" height="18" fill="var(--tone)" stroke="var(--ink)" stroke-width="1.5"/><text x="496.8" y="152" class="lab">8,3</text><text x="180" y="178" class="val" text-anchor="end">7. Pulp Fiction</text><rect x="190" y="165" width="298.8" height="18" fill="var(--tone)" stroke="var(--ink)" stroke-width="1.5"/><text x="496.8" y="179" class="lab">8,3</text><text x="180" y="205" class="val" text-anchor="end">8. Whiplash</text><rect x="190" y="192" width="298.8" height="18" fill="var(--tone)" stroke="var(--ink)" stroke-width="1.5"/><text x="496.8" y="206" class="lab">8,3</text><text x="180" y="232" class="val" text-anchor="end">9. The Dark Knight</text><rect x="190" y="219" width="295.2" height="18" fill="var(--tone)" stroke="var(--ink)" stroke-width="1.5"/><text x="493.2" y="233" class="lab">8,2</text><text x="180" y="259" class="val" text-anchor="end">10. The Green Mile</text><rect x="190" y="246" width="295.2" height="18" fill="var(--tone)" stroke="var(--ink)" stroke-width="1.5"/><text x="493.2" y="260" class="lab">8,2</text></svg><div class="fig"><b>Fig. 5.3</b> Les 10 films les mieux notés, sur 10</div>
       </div>
     </div>
+    <div class="ch-end"><span class="pg">p. 08</span><a class="next" href="#hors-serie"><span class="mono">Fin du chapitre 05</span><b>Prochaine page, Hors-série, jeux, web et design</b><span class="arr" aria-hidden="true">→</span></a></div>
   </div>
 </section>
 
@@ -734,9 +781,53 @@ footer .tbc { display: inline-block; margin-top: 36px; font-family: var(--hand);
         </div>
       </div>
     </div>
+    <div class="ch-end"><span class="pg">p. 09</span><a class="next" href="#index"><span class="mono">Fin du hors-série</span><b>Prochaine page, Tous les projets, par domaine</b><span class="arr" aria-hidden="true">→</span></a></div>
   </div>
 </section>
 
+
+
+<section class="toc idx" id="index">
+  <div class="wrap">
+    <div class="vol"><h2>Tous les projets</h2><span class="mono">Par domaine</span></div>
+    <div class="filters" role="group" aria-label="Filtrer les projets par domaine">
+      <button type="button" data-f="all" aria-pressed="true" id="fi-all">Tous</button>
+      <button type="button" data-f="data" aria-pressed="false" id="fi-data">Data</button>
+      <button type="button" data-f="ia" aria-pressed="false" id="fi-ia">IA et ML</button>
+      <button type="button" data-f="dev" aria-pressed="false" id="fi-dev">Développement</button>
+      <button type="button" data-f="jeu" aria-pressed="false" id="fi-jeu">Jeux</button>
+      <button type="button" data-f="design" aria-pressed="false" id="fi-design">Design</button>
+    </div>
+    <div class="idx-wrap"><table class="idx-table">
+      <thead><tr><th scope="col">Projet</th><th scope="col">En une phrase</th><th scope="col">Domaine</th></tr></thead>
+      <tbody id="idx-rows">
+          <tr data-c="ia"><td class="pn"><a href="#ch1">FraudDetect</a></td><td>Une IA de détection de fraude bancaire, avec une seule fausse alerte sur 56 864 paiements.</td><td class="pd">IA et ML</td></tr>
+          <tr data-c="ia"><td class="pn"><a href="#ch4">TreeTech</a></td><td>Comparaison de 6 IA conversationnelles sur une même grille.</td><td class="pd">IA et ML</td></tr>
+          <tr data-c="ia"><td class="pn"><a href="https://github.com/Hadiza06/pneumonia-detection">Détection de pneumonie</a> <span class="wip">en cours</span></td><td>Deep learning sur des images médicales.</td><td class="pd">IA et ML</td></tr>
+          <tr data-c="ia"><td class="pn">Émotions faciales</td><td>Reconnaître les émotions sur des visages, avec PyTorch.</td><td class="pd">IA et ML</td></tr>
+          <tr data-c="data"><td class="pn"><a href="#ch2">AeroTrack</a></td><td>Tableau de bord Power BI pour piloter trois usines aéronautiques.</td><td class="pd">Data</td></tr>
+          <tr data-c="data"><td class="pn"><a href="#ch3">ETL COVID-19</a></td><td>Chaîne automatique qui récupère chaque jour les données de 231 pays.</td><td class="pd">Data</td></tr>
+          <tr data-c="data"><td class="pn"><a href="#ch5">Analyse TMDB</a></td><td>Analyse exploratoire de milliers de films.</td><td class="pd">Data</td></tr>
+          <tr data-c="data"><td class="pn"><a href="https://github.com/Hadiza06/Anime-scraper">Anime Scraper</a></td><td>Récupérer des données sur le web avec Python.</td><td class="pd">Data</td></tr>
+          <tr data-c="data dev"><td class="pn"><a href="#parcours">Skills4Mind</a> <span class="stg">stage</span></td><td>Application web avec tableau de bord, en stage.</td><td class="pd">Data, Dev</td></tr>
+          <tr data-c="data"><td class="pn"><a href="#parcours">HISP Mali</a> <span class="stg">stage</span></td><td>Qualité des données de santé et tableaux de bord, en stage.</td><td class="pd">Data</td></tr>
+          <tr data-c="dev"><td class="pn"><a href="https://github.com/Hadiza06/devWeb">UniLearn</a></td><td>Plateforme e-learning en PHP et MySQL.</td><td class="pd">Dev</td></tr>
+          <tr data-c="dev"><td class="pn"><a href="https://github.com/Hadiza06/Flowly">Flowly</a></td><td>Application web Django.</td><td class="pd">Dev</td></tr>
+          <tr data-c="dev"><td class="pn"><a href="#hors-serie">Orris</a></td><td>Boutique en ligne WordPress, du catalogue au paiement.</td><td class="pd">Dev</td></tr>
+          <tr data-c="dev"><td class="pn"><a href="https://github.com/Hadiza06/Adventure-Of-Code">Advent of Code</a></td><td>Puzzles d'algorithmique en Python.</td><td class="pd">Dev</td></tr>
+          <tr data-c="jeu"><td class="pn"><a href="#hors-serie">Cozy Café</a> <span class="wip">en cours</span></td><td>Jeu de gestion de café sur Roblox.</td><td class="pd">Jeux</td></tr>
+          <tr data-c="jeu"><td class="pn"><a href="https://github.com/Hadiza06/Godot-first">Jeu de plateforme</a></td><td>Jeu 2D sous Godot.</td><td class="pd">Jeux</td></tr>
+          <tr data-c="jeu dev"><td class="pn"><a href="https://github.com/Hadiza06/Memory-Card">Memory Card</a></td><td>Jeu de mémoire en Java avec MySQL.</td><td class="pd">Jeux, Dev</td></tr>
+          <tr data-c="jeu dev"><td class="pn"><a href="https://github.com/Hadiza06/candy-crush-saga">CandyECE</a></td><td>Candy Crush en C, en équipe de 3.</td><td class="pd">Jeux, Dev</td></tr>
+          <tr data-c="design"><td class="pn"><a href="#hors-serie">Loft &amp; Marbre</a></td><td>Logo et application mobile sur Figma.</td><td class="pd">Design</td></tr>
+          <tr data-c="design"><td class="pn"><a href="https://github.com/Hadiza06/Floww">Floww</a></td><td>Application de bien-être musical, design system complet.</td><td class="pd">Design</td></tr>
+          <tr data-c="design"><td class="pn"><a href="#hors-serie">Sous les pixels</a></td><td>Affiche de sensibilisation au cyberharcèlement.</td><td class="pd">Design</td></tr>
+          <tr data-c="design"><td class="pn"><a href="#hors-serie">Variations de couleurs</a></td><td>Un paysage décliné en 6 ambiances.</td><td class="pd">Design</td></tr>
+      </tbody>
+    </table></div>
+    <div class="ch-end"><span class="pg">p. 10</span><a class="next" href="#fiche"><span class="mono">Fin de l'index</span><b>Prochaine page, Annexe, fiche technique</b><span class="arr" aria-hidden="true">→</span></a></div>
+  </div>
+</section>
 
 <!-- Fiche technique -->
 <section class="chapter tone" id="fiche">
@@ -763,6 +854,7 @@ footer .tbc { display: inline-block; margin-top: 36px; font-family: var(--hand);
         </ul>
       </div>
     </div>
+    <div class="ch-end"><span class="pg">p. 11</span><a class="next" href="#contact"><span class="mono">Fin de l'annexe</span><b>Prochaine page, Dernière page, me contacter</b><span class="arr" aria-hidden="true">→</span></a></div>
   </div>
 </section>
 
@@ -770,12 +862,12 @@ footer .tbc { display: inline-block; margin-top: 36px; font-family: var(--hand);
 
 <footer id="contact">
   <div class="wrap">
-    <div class="mono" style="color:var(--tone)">Contact</div>
+    <div class="mono" style="color:var(--tone)">Dernière page</div>
     <h2>La suite s'écrit <em>avec vous.</em></h2>
     <p>Je recherche une alternance dès que possible, ou un stage de 5 à 6 mois à partir de mars 2027, en Data Analyst, Data Engineer ou AI Engineer junior.</p>
     <div class="links"><a href="https://www.linkedin.com/in/hadizahamidou/">LinkedIn</a><a href="https://github.com/Hadiza06">GitHub</a><a href="mailto:bhadizahamidou@gmail.com">E-mail</a></div>
     <p style="margin-top:16px;font-family:var(--mono);font-size:0.85rem">bhadizahamidou@gmail.com</p>
-    <div class="tbc">À suivre dans le volume 02…</div>
+    <div class="tbc">Fin du volume 01. À suivre dans le volume 02…</div>
   </div>
 </footer>
 
@@ -791,6 +883,15 @@ footer .tbc { display: inline-block; margin-top: 36px; font-family: var(--hand);
       fb.forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
     });
   });
+  var unit = document.querySelector('svg.unit');
+  if (unit && 'IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    unit.classList.add('armed');
+    var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { unit.classList.add('play'); io.disconnect(); } }); }, { threshold: 0.4 });
+    io.observe(unit);
+  }
+  var egg = document.getElementById('egg');
+  if (egg) egg.addEventListener('click', function () { egg.textContent = egg.textContent === '!false' ? 'true' : '!false'; });
+  try { console.log('%cTu lis le code source ? On est faits pour s\'entendre. bhadizahamidou@gmail.com', 'font: 600 14px monospace; color: #d6402b'); } catch (e) {}
   var lb = document.getElementById('lb'), lbi = document.getElementById('lb-img');
   document.querySelectorAll('img.shot, .extra img').forEach(function (img) {
     img.addEventListener('click', function () { lbi.src = img.src; lbi.alt = img.alt; lb.classList.add('open'); });
