@@ -1,447 +1,697 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hadiza · Portfolio</title>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hadiza Hamidou BA, Vol. 01</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Caveat:wght@600&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --rose: #f9c6d0; --rose-dark: #c45e7a;
-    --lavender: #ddd6f3; --lavender-dark: #6f62a8;
-    --mint: #c8eedd; --mint-dark: #3a8f65;
-    --peach: #fde8d0; --peach-dark: #b86e3c;
-    --cream: #fdf8f4; --text: #3a2e3e; --text-muted: #8a7a90; --white: #fff;
+/* Manga x Data : une page de manga très propre. Papier, encre, une seule couleur d'accent (vermillon).
+   Chaque projet = un chapitre découpé en cases. Graphes redessinés quand les chiffres sont exacts. */
+:root {
+  --paper: #f7f4ec;
+  --white: #fffdf8;
+  --ink: #151515;
+  --muted: #55524b;
+  --tone: #cfcac0;
+  --accent: #d6402b;
+  --display: "Dela Gothic One", "Arial Black", sans-serif;
+  --body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+  --hand: "Caveat", "Comic Sans MS", cursive;
+  --line: 2.5px solid var(--ink);
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--body); font-size: 16px; line-height: 1.6; }
+a { color: var(--ink); text-decoration-color: var(--accent); text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+.wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+h1, h2, h3 { margin: 0; text-wrap: balance; }
+.mono { font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.1em; text-transform: uppercase; }
+.tone-old { background-color: var(--paper); background-image: radial-gradient(color-mix(in srgb, var(--ink) 14%, transparent) 1px, transparent 1.3px); background-size: 7px 7px; }
+
+.tone { background-color: var(--paper); background-image: radial-gradient(color-mix(in srgb, var(--ink) 16%, transparent) 1.1px, transparent 1.4px); background-size: 7px 7px; }
+.tone > .wrap { background: var(--paper); box-shadow: 0 0 0 1px var(--paper); padding-top: 4px; padding-bottom: 4px; border-left: 1px solid var(--tone); border-right: 1px solid var(--tone); }
+@media (max-width: 1180px) { .tone > .wrap { border: none; } }
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .page > .panel, .extra > .panel, .jobs > .panel, .sheet > .panel, .ch-head { animation: rise linear both; animation-timeline: view(); animation-range: entry 0% entry 35%; }
+    @keyframes rise { from { transform: translateY(22px); opacity: 0.55; } to { transform: none; opacity: 1; } }
   }
-  * { margin:0; padding:0; box-sizing:border-box; }
-  html { scroll-behavior:smooth; }
-  body { font-family:'Nunito',sans-serif; background:var(--cream); color:var(--text); overflow-x:hidden; }
-  nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-items:center; justify-content:space-between; padding:1rem 2.5rem; background:rgba(253,248,244,0.88); backdrop-filter:blur(10px); border-bottom:1px solid rgba(249,198,208,0.4); }
-  .nav-logo { font-family:'Playfair Display',serif; font-size:1.25rem; color:var(--rose-dark); }
-  .nav-links { display:flex; gap:1.5rem; list-style:none; flex-wrap:wrap; }
-  .nav-links a { text-decoration:none; font-size:0.85rem; font-weight:700; color:var(--text-muted); letter-spacing:0.05em; transition:color .2s; }
-  .nav-links a:hover { color:var(--rose-dark); }
-  .blob { position:absolute; border-radius:50%; filter:blur(60px); pointer-events:none; opacity:.4; }
-  .hero { min-height:100vh; display:flex; align-items:center; justify-content:center; padding:7rem 2rem 4rem; position:relative; overflow:hidden; text-align:center; }
-  .blob-1 { width:440px; height:440px; background:var(--rose); top:-80px; right:-100px; }
-  .blob-2 { width:320px; height:320px; background:var(--lavender); bottom:60px; left:-80px; }
-  .blob-3 { width:220px; height:220px; background:var(--mint); top:40%; right:8%; }
-  .hero-content { position:relative; z-index:1; max-width:700px; }
-  .hero-tag { display:inline-block; background:var(--rose); color:var(--rose-dark); font-size:0.75rem; font-weight:800; letter-spacing:0.12em; text-transform:uppercase; padding:.4rem 1.1rem; border-radius:100px; margin-bottom:1.4rem; }
-  .hero h1 { font-family:'Playfair Display',serif; font-size:clamp(2.4rem,6vw,3.8rem); line-height:1.15; margin-bottom:1rem; }
-  .hero h1 em { font-style:italic; color:var(--rose-dark); }
-  .hero p { font-size:1.02rem; color:var(--text-muted); line-height:1.75; max-width:520px; margin:0 auto 2rem; }
-  .hero-btns { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
-  .btn { display:inline-block; padding:.75rem 1.8rem; border-radius:100px; font-size:.88rem; font-weight:800; text-decoration:none; transition:transform .18s, box-shadow .18s; cursor:pointer; border:none; }
-  .btn:hover { transform:translateY(-2px); }
-  .btn-primary { background:var(--rose-dark); color:#fff; box-shadow:0 4px 16px rgba(196,94,122,.3); }
-  .btn-secondary { background:var(--white); color:var(--rose-dark); border:2px solid var(--rose); }
-  section { padding:5rem 2rem; max-width:1000px; margin:0 auto; }
-  .section-label { display:inline-flex; align-items:center; gap:.5rem; font-size:.72rem; font-weight:800; letter-spacing:.15em; text-transform:uppercase; color:var(--lavender-dark); margin-bottom:.8rem; }
-  .section-label::before { content:''; display:inline-block; width:20px; height:2px; background:var(--lavender-dark); border-radius:2px; }
-  .section-title { font-family:'Playfair Display',serif; font-size:clamp(1.6rem,3vw,2.2rem); margin-bottom:2.5rem; }
-  .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:2rem; align-items:start; }
-  @media(max-width:640px){ .about-grid,.featured-grid,.design-featured { grid-template-columns:1fr; } }
-  .about-text p { font-size:.97rem; line-height:1.75; color:var(--text-muted); margin-bottom:1rem; }
-  .skills-grid { display:flex; flex-wrap:wrap; gap:.55rem; }
-  .skill-pill { padding:.32rem .85rem; border-radius:100px; font-size:.78rem; font-weight:700; }
-  .pill-rose { background:var(--rose); color:var(--rose-dark); }
-  .pill-lavender { background:var(--lavender); color:var(--lavender-dark); }
-  .pill-mint { background:var(--mint); color:var(--mint-dark); }
-  .pill-peach { background:var(--peach); color:var(--peach-dark); }
-  .subsection-title { font-family:'Playfair Display',serif; font-size:1.15rem; margin:2.5rem 0 1.2rem; color:var(--text); display:flex; align-items:center; gap:.75rem; }
-  .subsection-title::after { content:''; flex:1; height:1px; background:rgba(249,198,208,.5); }
-  .projects-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(270px,1fr)); gap:1.4rem; }
-  .project-card { background:var(--white); border-radius:20px; padding:1.5rem; border:1.5px solid rgba(249,198,208,.45); transition:transform .2s, box-shadow .2s; position:relative; overflow:hidden; }
-  .project-card:hover { transform:translateY(-4px); box-shadow:0 12px 32px rgba(196,94,122,.13); }
-  .project-card::before { content:''; position:absolute; top:0; left:0; right:0; height:4px; border-radius:20px 20px 0 0; }
-  .card-rose::before { background:var(--rose-dark); }
-  .card-lavender::before { background:var(--lavender-dark); }
-  .card-mint::before { background:var(--mint-dark); }
-  .project-icon { width:42px; height:42px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.2rem; margin-bottom:.9rem; }
-  .icon-rose { background:var(--rose); }
-  .icon-lavender { background:var(--lavender); }
-  .icon-mint { background:var(--mint); }
-  .project-card h3 { font-size:.97rem; font-weight:800; margin-bottom:.4rem; }
-  .project-card p { font-size:.84rem; color:var(--text-muted); line-height:1.6; margin-bottom:.9rem; }
-  .project-tags { display:flex; flex-wrap:wrap; gap:.35rem; margin-bottom:.9rem; }
-  .project-tag { font-size:.7rem; font-weight:700; padding:.18rem .6rem; border-radius:100px; }
-  .project-link { display:inline-flex; align-items:center; gap:.3rem; font-size:.78rem; font-weight:800; color:var(--rose-dark); text-decoration:none; border-bottom:1.5px solid var(--rose); padding-bottom:.1rem; transition:color .2s; }
-  .project-link:hover { color:var(--lavender-dark); border-color:var(--lavender); }
-  .featured-card { background:var(--white); border-radius:24px; padding:2rem; border:2px solid var(--rose); margin-bottom:1.4rem; position:relative; overflow:hidden; }
-  .featured-card::before { content:''; position:absolute; top:0; left:0; right:0; height:4px; background:var(--rose-dark); border-radius:24px 24px 0 0; }
-  .featured-badge { display:inline-block; background:var(--rose); color:var(--rose-dark); font-size:.68rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; padding:.2rem .7rem; border-radius:100px; margin-bottom:.8rem; }
-  .featured-card h3 { font-size:1.05rem; font-weight:800; margin-bottom:.5rem; }
-  .featured-card .desc { font-size:.88rem; color:var(--text-muted); line-height:1.7; margin-bottom:1rem; }
-  .featured-grid { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1rem; }
-  .featured-stat { background:var(--cream); border-radius:12px; padding:.75rem 1rem; }
-  .featured-stat .stat-label { font-size:.7rem; font-weight:800; text-transform:uppercase; letter-spacing:.08em; color:var(--text-muted); margin-bottom:.2rem; }
-  .featured-stat .stat-val { font-size:.9rem; font-weight:700; color:var(--text); }
-  .wip-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:1.2rem; }
-  .wip-card { background:var(--white); border-radius:20px; padding:1.4rem; border:1.5px dashed rgba(196,94,122,.35); position:relative; overflow:hidden; opacity:.88; }
-  .wip-badge { display:inline-flex; align-items:center; gap:.3rem; background:var(--peach); color:var(--peach-dark); font-size:.65rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase; padding:.18rem .65rem; border-radius:100px; margin-bottom:.75rem; }
-  .wip-badge::before { content:''; width:6px; height:6px; border-radius:50%; background:var(--peach-dark); animation:pulse 1.6s infinite; }
-  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
-  .wip-card h3 { font-size:.93rem; font-weight:800; margin-bottom:.35rem; }
-  .wip-card p { font-size:.82rem; color:var(--text-muted); line-height:1.6; margin-bottom:.8rem; }
-  .wip-progress { height:4px; background:var(--peach); border-radius:100px; margin-bottom:.8rem; }
-  .wip-progress-bar { height:100%; border-radius:100px; background:var(--peach-dark); }
-  .design-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(270px,1fr)); gap:1.4rem; margin-bottom:1.4rem; }
-  .design-card-simple { background:var(--white); border-radius:20px; padding:1.5rem; border:1.5px solid rgba(221,214,243,.6); transition:transform .2s, box-shadow .2s; position:relative; overflow:hidden; }
-  .design-card-simple:hover { transform:translateY(-4px); box-shadow:0 12px 32px rgba(111,98,168,.12); }
-  .design-card-simple::before { content:''; position:absolute; top:0; left:0; right:0; height:4px; border-radius:20px 20px 0 0; background:var(--lavender-dark); }
-  .design-preview-sm { border-radius:12px; height:100px; margin-bottom:1rem; display:flex; align-items:center; justify-content:center; font-family:'Playfair Display',serif; font-size:1rem; font-style:italic; color:var(--text); letter-spacing:.03em; }
-  .preview-wp { background:linear-gradient(135deg,#ddd6f3 0%,#f9c6d0 100%); }
-  .preview-inkscape { background:linear-gradient(135deg,#fde8d0 0%,#f9c6d0 100%); }
-  .preview-gimp { background:linear-gradient(135deg,#c8eedd 0%,#fde8d0 100%); }
-  .timeline { position:relative; padding-left:2rem; }
-  .timeline::before { content:''; position:absolute; left:0; top:.5rem; bottom:.5rem; width:2px; background:linear-gradient(to bottom,var(--rose),var(--lavender),var(--mint)); border-radius:2px; }
-  .timeline-item { position:relative; margin-bottom:2.2rem; }
-  .timeline-dot { position:absolute; left:-2.42rem; top:.35rem; width:13px; height:13px; border-radius:50%; border:2px solid var(--cream); background:var(--rose-dark); box-shadow:0 0 0 2px var(--rose-dark); }
-  .timeline-dot.lav { background:var(--lavender-dark); box-shadow:0 0 0 2px var(--lavender-dark); }
-  .timeline-dot.mint { background:var(--mint-dark); box-shadow:0 0 0 2px var(--mint-dark); }
-  .timeline-date { font-size:.73rem; font-weight:800; text-transform:uppercase; letter-spacing:.1em; color:var(--text-muted); margin-bottom:.25rem; }
-  .timeline-item h3 { font-size:.97rem; font-weight:800; margin-bottom:.2rem; }
-  .timeline-item span { font-size:.83rem; color:var(--rose-dark); font-weight:700; }
-  .timeline-item p { font-size:.86rem; color:var(--text-muted); line-height:1.65; margin-top:.4rem; }
-  .timeline-bullets { margin-top:.5rem; padding-left:1rem; }
-  .timeline-bullets li { font-size:.84rem; color:var(--text-muted); line-height:1.65; margin-bottom:.2rem; }
-  .contact-wrapper { background:var(--white); border-radius:24px; padding:3rem; border:1.5px solid rgba(249,198,208,.5); max-width:580px; margin:0 auto; text-align:center; }
-  .contact-wrapper p { color:var(--text-muted); font-size:.97rem; line-height:1.75; margin-bottom:2rem; }
-  .contact-links { display:flex; flex-wrap:wrap; gap:1rem; justify-content:center; }
-  .contact-link { display:flex; align-items:center; gap:.5rem; padding:.62rem 1.4rem; border-radius:100px; font-size:.86rem; font-weight:800; text-decoration:none; transition:transform .18s; }
-  .contact-link:hover { transform:translateY(-2px); }
-  .link-rose { background:var(--rose); color:var(--rose-dark); }
-  .link-lavender { background:var(--lavender); color:var(--lavender-dark); }
-  .link-mint { background:var(--mint); color:var(--mint-dark); }
-  footer { text-align:center; padding:2rem; font-size:.8rem; color:var(--text-muted); border-top:1px solid rgba(249,198,208,.3); }
-  @keyframes fadeUp { from{opacity:0;transform:translateY(22px)} to{opacity:1;transform:translateY(0)} }
-  .hero-content > * { animation:fadeUp .6s ease both; }
-  .hero-content > *:nth-child(1){animation-delay:.1s}
-  .hero-content > *:nth-child(2){animation-delay:.2s}
-  .hero-content > *:nth-child(3){animation-delay:.3s}
-  .hero-content > *:nth-child(4){animation-delay:.42s}
+}
+
+/* En-tête */
+header.top { border-bottom: var(--line); background: var(--paper); position: sticky; top: 0; z-index: 5; }
+header.top .wrap { display: flex; justify-content: space-between; align-items: center; height: 58px; gap: 16px; }
+header.top .name { font-family: var(--mono); font-weight: 600; font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; }
+header.top .name span { color: var(--accent); }
+header.top ul { list-style: none; display: flex; gap: 22px; margin: 0; padding: 0; }
+header.top ul a { font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; }
+header.top ul a:hover { color: var(--accent); }
+@media (max-width: 760px) { header.top ul { display: none; } }
+
+/* Couverture */
+.cover { padding: 40px 0 56px; }
+.cover-grid { display: grid; grid-template-columns: repeat(12, 1fr); grid-auto-rows: minmax(60px, auto); gap: 10px; }
+.panel { border: var(--line); background: var(--white); position: relative; overflow: hidden; }
+.c-title { grid-column: 1 / span 8; grid-row: span 4; padding: 34px 34px 30px; display: flex; flex-direction: column; justify-content: space-between; }
+.c-title .mono { color: var(--muted); }
+.c-title h1 { font-family: var(--display); font-weight: 400; font-size: clamp(2.3rem, 5.6vw, 4.4rem); line-height: 1.02; margin: 18px 0; }
+.c-title h1 em { font-style: normal; color: var(--accent); }
+.c-title p { max-width: 54ch; margin: 0; color: var(--muted); }
+.c-side { grid-column: 9 / span 4; grid-row: span 2; padding: 22px; }
+.c-art { grid-row: span 3; padding: 0; display: flex; align-items: flex-end; background: var(--white); }
+.c-art .cover-art { width: 100%; height: 100%; }
+.vol-badge { position: absolute; top: 0; right: 0; background: var(--ink); color: var(--paper); padding: 8px 14px; text-align: right; }
+.vol-badge b { display: block; font-family: var(--display); font-weight: 400; font-size: 1.3rem; line-height: 1; }
+.vol-badge span { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--tone); }
+.c-status { grid-row: span 1 !important; }
+.c-side.speed { background: var(--white); }
+.c-side.speed::before { content: ""; position: absolute; inset: 0; background: repeating-conic-gradient(from 0deg at 50% 50%, var(--ink) 0deg 0.9deg, transparent 0.9deg 6deg); opacity: 0.12; -webkit-mask: radial-gradient(circle, transparent 0 60px, #000 170px); mask: radial-gradient(circle, transparent 0 60px, #000 170px); }
+.c-side .who { position: relative; text-align: center; padding-top: 18px; }
+.c-side .who b { display: block; font-family: var(--display); font-weight: 400; font-size: 1.6rem; line-height: 1.1; }
+.c-side .who span { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.1em; color: var(--muted); }
+.c-status { grid-column: 9 / span 4; grid-row: span 2; padding: 20px 22px; background: var(--ink); color: var(--paper); }
+.c-status .mono { color: var(--tone); }
+.c-status p { margin: 8px 0 0; font-weight: 600; }
+.c-status .dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: #4ade80; margin-right: 8px; }
+.c-strip { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.c-strip .panel { padding: 16px 18px; }
+.c-strip b { display: block; font-family: var(--display); font-weight: 400; font-size: 2rem; line-height: 1; }
+.c-strip b.acc { color: var(--accent); }
+.c-strip span { font-size: 0.86rem; color: var(--muted); }
+.cta { display: inline-block; margin-top: 18px; align-self: flex-start; font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; background: var(--ink); color: var(--paper); padding: 12px 20px; box-shadow: 4px 4px 0 var(--accent); transition: transform .12s, box-shadow .12s; }
+.cta:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--accent); }
+@media (max-width: 860px) { .c-title, .c-side, .c-status { grid-column: 1 / -1; } .c-strip { grid-template-columns: 1fr 1fr; } }
+
+/* Sommaire */
+.toc { padding: 64px 0; border-top: var(--line); }
+.vol { display: flex; align-items: baseline; gap: 18px; flex-wrap: wrap; margin-bottom: 26px; }
+.vol h2 { font-family: var(--display); font-weight: 400; font-size: clamp(2rem, 4.6vw, 3.2rem); line-height: 1; }
+.vol .mono { color: var(--muted); }
+.toc ol { list-style: none; margin: 0; padding: 0; border-top: var(--line); }
+.toc li a { display: grid; grid-template-columns: 110px 1fr auto; gap: 16px; align-items: baseline; padding: 16px 4px; border-bottom: 1px solid var(--tone); text-decoration: none; transition: background .12s, padding .12s; }
+.toc li a:hover { background: var(--white); padding-left: 12px; }
+.toc .n { font-family: var(--mono); font-size: 0.78rem; color: var(--accent); font-weight: 600; }
+.toc .t { font-family: var(--display); font-size: 1.35rem; line-height: 1.15; }
+.toc .t small { display: block; font-family: var(--body); font-size: 0.92rem; color: var(--muted); margin-top: 2px; }
+.toc .g { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); text-align: right; }
+@media (max-width: 640px) { .toc li a { grid-template-columns: 1fr; gap: 2px; } .toc .g { text-align: left; } }
+
+/* Chapitres */
+.chapter { padding: 64px 0; border-top: var(--line); }
+.ch-head { display: grid; grid-template-columns: auto 1fr; gap: 4px 30px; align-items: center; margin-bottom: 10px; border: var(--line); background: var(--white); padding: 30px 34px; position: relative; overflow: hidden; }
+.ch-head::before { content: ""; position: absolute; inset: 0; background: repeating-conic-gradient(from 0deg at 9% 50%, var(--ink) 0deg 0.7deg, transparent 0.7deg 7deg); opacity: 0.09; -webkit-mask: radial-gradient(circle at 9% 50%, transparent 0 50px, #000 150px, transparent 380px); mask: radial-gradient(circle at 9% 50%, transparent 0 50px, #000 150px, transparent 380px); pointer-events: none; }
+.ch-head > * { position: relative; }
+.code-link { grid-column: 2; justify-self: start; margin-top: 12px; font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; border: 2px solid var(--ink); padding: 6px 12px; background: var(--paper); box-shadow: 3px 3px 0 var(--accent); }
+.code-link:hover { background: var(--ink); color: var(--paper); }
+@media (max-width: 640px) { .code-link { grid-column: 1; } }
+
+.ch-head .hook { grid-column: 2; margin: 10px 0 0; font-size: 1.12rem; font-weight: 500; max-width: 60ch; padding-left: 14px; border-left: 4px solid var(--accent); }
+@media (max-width: 640px) { .ch-head { grid-template-columns: 1fr; padding: 22px; } .ch-head .hook { grid-column: 1; } .ch-num { grid-row: auto !important; } }
+.ch-num { grid-row: span 3; font-family: var(--display); font-size: clamp(4rem, 11vw, 8rem); line-height: 0.85; color: var(--paper); -webkit-text-stroke: 2.5px var(--ink); text-shadow: 5px 5px 0 var(--accent); }
+.ch-head .mono { color: var(--accent); font-weight: 600; }
+.ch-head h2 { font-family: var(--display); font-weight: 400; font-size: clamp(1.9rem, 4.4vw, 3rem); line-height: 1.02; }
+.ch-head h2 small { display: block; font-family: var(--body); font-weight: 500; font-size: 1.05rem; color: var(--muted); margin-top: 6px; }
+.page { display: grid; grid-template-columns: repeat(12, 1fr); gap: 10px; }
+.page .panel { padding: 22px 22px 20px; }
+.tag { position: absolute; top: 0; left: 0; background: var(--ink); color: var(--paper); font-family: var(--mono); font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 10px; }
+.panel.has-tag { padding-top: 40px; }
+.panel p { margin: 0; }
+.panel p + p { margin-top: 10px; }
+.panel h3 { font-family: var(--display); font-weight: 400; font-size: 1.25rem; line-height: 1.2; margin-bottom: 8px; }
+.s3 { grid-column: span 3; } .s4 { grid-column: span 4; } .s5 { grid-column: span 5; } .s6 { grid-column: span 6; } .s7 { grid-column: span 7; } .s8 { grid-column: span 8; } .s12 { grid-column: 1 / -1; }
+@media (max-width: 860px) { .s3, .s4, .s5, .s6, .s7, .s8 { grid-column: 1 / -1; } }
+.panel.dark { background: var(--ink); color: var(--paper); }
+.panel.dark .tag { background: var(--accent); }
+.panel.dark p { color: #e6e1d6; }
+.panel.tone { background-color: var(--white); }
+.big { font-family: var(--display); font-size: clamp(2.6rem, 6vw, 4rem); line-height: 1; color: var(--accent); }
+.big small { font-family: var(--body); font-size: 1rem; font-weight: 600; color: var(--ink); margin-left: 6px; }
+.panel.dark .big small { color: var(--paper); }
+.steps { list-style: none; margin: 0; padding: 0; counter-reset: st; }
+.steps li { counter-increment: st; padding: 9px 0 9px 40px; position: relative; border-bottom: 1px dashed var(--tone); }
+.steps li:last-child { border-bottom: none; }
+.steps li::before { content: counter(st, decimal-leading-zero); position: absolute; left: 0; top: 9px; font-family: var(--mono); font-size: 0.8rem; font-weight: 600; color: var(--accent); }
+.steps li small { display: block; color: var(--muted); font-size: 0.85rem; }
+.tools { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 6px; }
+.tools span { font-family: var(--mono); font-size: 0.72rem; padding: 2px 8px; border: 1.5px solid var(--ink); background: var(--white); }
+.panel.dark .tools span { background: transparent; border-color: var(--paper); color: var(--paper); }
+.note { font-family: var(--hand); font-size: 1.35rem; line-height: 1.15; color: var(--accent); transform: rotate(-2deg); display: inline-block; margin-top: 10px; }
+.bubble { position: relative; background: var(--white); border: var(--line); border-radius: 26px; padding: 16px 20px; font-weight: 600; }
+.bubble::after { content: ""; position: absolute; left: 34px; bottom: -16px; width: 22px; height: 16px; background: var(--white); border-right: var(--line); border-bottom: var(--line); transform: skewX(-35deg); }
+.fig { font-family: var(--mono); font-size: 0.7rem; color: var(--muted); margin-top: 12px; padding-top: 8px; border-top: 1px solid var(--tone); }
+.fig b { color: var(--ink); font-weight: 600; }
+svg { display: block; width: 100%; height: auto; overflow: visible; }
+svg .lab { font-family: var(--mono); font-size: 12px; font-weight: 600; fill: var(--ink); }
+svg .val { font-family: var(--mono); font-size: 12px; fill: var(--ink); }
+svg .hand { font-family: var(--hand); font-size: 19px; fill: var(--accent); }
+.shot { display: block; width: 100%; height: auto; border: 1.5px solid var(--ink); cursor: zoom-in; background: #fff; }
+.legend { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 12px; font-size: 0.82rem; }
+.legend i { display: inline-block; width: 14px; height: 14px; border: 1.5px solid var(--ink); vertical-align: -2px; margin-right: 6px; }
+.legend i.a { background: var(--accent); }
+.legend i.h { background: repeating-linear-gradient(45deg, var(--ink) 0 1.2px, transparent 1.2px 4px); }
+
+/* Matrice */
+.matrix { display: grid; grid-template-columns: auto 1fr 1fr; gap: 6px; font-size: 0.85rem; }
+.matrix .h { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; justify-content: center; text-align: center; padding: 4px; }
+.matrix .c { border: 2px solid var(--ink); padding: 14px 10px; text-align: center; }
+.matrix .c b { display: block; font-family: var(--display); font-weight: 400; font-size: 1.6rem; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.matrix .c span { font-size: 0.78rem; }
+.matrix .ok { background: var(--tone); }
+.matrix .bad { background: var(--white); background-image: repeating-linear-gradient(45deg, color-mix(in srgb, var(--ink) 25%, transparent) 0 1px, transparent 1px 5px); }
+.matrix .hit { background: var(--accent); color: var(--white); }
+
+/* Flux ETL */
+.flow { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; align-items: stretch; }
+.flow div { border: 2px solid var(--ink); background: var(--white); padding: 14px 10px; text-align: center; position: relative; margin-right: 22px; }
+.flow div:last-child { margin-right: 0; background: var(--accent); color: var(--white); }
+.flow div:not(:last-child)::after { content: "▶"; position: absolute; right: -19px; top: 50%; transform: translateY(-50%); font-size: 0.8rem; color: var(--accent); }
+.flow b { display: block; font-weight: 700; font-size: 0.92rem; }
+.flow small { font-family: var(--mono); font-size: 0.7rem; }
+@media (max-width: 760px) { .flow { grid-template-columns: 1fr; gap: 18px; } .flow div { margin-right: 0; } .flow div:not(:last-child)::after { content: "▼"; right: auto; left: 50%; top: auto; bottom: -19px; transform: translateX(-50%); } }
+
+/* Labo TreeTech */
+.lab6 { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; }
+.lab6 div { border: 2px solid var(--ink); background: var(--white); padding: 12px 6px; text-align: center; font-family: var(--mono); font-size: 0.78rem; font-weight: 600; }
+.lab6 div::before { content: ""; display: block; width: 18px; height: 32px; margin: 0 auto 8px; border: 2px solid var(--ink); border-top: none; border-radius: 0 0 10px 10px; background: linear-gradient(to top, var(--accent) 45%, transparent 45%); }
+@media (max-width: 560px) { .lab6 { grid-template-columns: repeat(3, 1fr); } }
+
+/* Hors-série */
+.extra { display: grid; grid-template-columns: repeat(12, 1fr); gap: 10px; }
+.extra .panel { padding: 0; display: flex; flex-direction: column; }
+.extra .panel img { display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; border-bottom: var(--line); cursor: zoom-in; background: #fff; }
+.extra .panel .txt { padding: 16px 18px 18px; }
+.extra .panel h3 { font-family: var(--display); font-weight: 400; font-size: 1.2rem; margin: 2px 0 6px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.extra .panel p { margin: 0; font-size: 0.92rem; color: var(--muted); }
+.extra .panel .mono { color: var(--accent); font-weight: 600; font-size: 0.68rem; }
+.extra .tall img { aspect-ratio: 4 / 5; }
+.wip { font-family: var(--mono); font-size: 0.64rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 2px 8px; background: var(--accent); color: var(--white); }
+.e-cozy { grid-column: span 8; grid-row: span 2; } .e-cozy img { aspect-ratio: 16 / 9.5; }
+.e4 { grid-column: span 4; } .e3 { grid-column: span 3; } .e6 { grid-column: span 6; }
+@media (max-width: 860px) { .e-cozy, .e4, .e3, .e6 { grid-column: 1 / -1; grid-row: auto; } }
+.archive { list-style: none; margin: 10px 0 0; padding: 0; }
+.archive li { padding: 7px 0; border-bottom: 1px dashed var(--tone); font-size: 0.9rem; color: var(--muted); }
+.archive li b { color: var(--ink); }
+.cozy-more { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; padding: 0 18px 18px; }
+.cozy-more img { aspect-ratio: 4 / 3 !important; border: 1.5px solid var(--ink) !important; }
+
+/* Parcours */
+.jobs { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.job { padding: 0 !important; }
+.job .jh { background: var(--ink); color: var(--paper); padding: 16px 22px; }
+.job .jh .mono { color: var(--tone); }
+.job .jh h3 { font-family: var(--display); font-weight: 400; font-size: 1.3rem; margin: 6px 0 2px; color: var(--paper); }
+.job .jh p { margin: 0; color: #e6e1d6; font-size: 0.9rem; }
+.job ul { margin: 0; padding: 16px 22px 20px 40px; }
+.job li { margin: 5px 0; font-size: 0.94rem; }
+.job li::marker { color: var(--accent); }
+@media (max-width: 760px) { .jobs { grid-template-columns: 1fr; } }
+
+/* Fiche technique */
+.sheet { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.sheet .panel { padding: 18px 20px; }
+.sheet h3 { font-family: var(--display); font-weight: 400; font-size: 1.05rem; margin-bottom: 10px; }
+.sheet ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.sheet li { font-family: var(--mono); font-size: 0.76rem; padding: 2px 8px; border: 1.5px solid var(--ink); }
+.sheet li.k { background: var(--accent); color: var(--white); border-color: var(--accent); }
+.sheet .wide { grid-column: 1 / -1; }
+.sheet .next li { border-style: dashed; color: var(--muted); }
+.certs { list-style: none; margin: 0; padding: 0; display: grid !important; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 6px 18px !important; }
+.certs li { border: none !important; padding: 6px 0 !important; border-bottom: 1px dashed var(--tone) !important; font-family: var(--body) !important; font-size: 0.9rem !important; }
+.certs li small { display: block; font-family: var(--mono); font-size: 0.68rem; color: var(--muted); }
+.certs li.k { background: none !important; color: var(--accent) !important; font-weight: 700; }
+@media (max-width: 860px) { .sheet { grid-template-columns: 1fr; } }
+
+footer { border-top: var(--line); padding: 72px 0 80px; background: var(--ink); color: var(--paper); position: relative; overflow: hidden; }
+footer::before { content: ""; position: absolute; inset: 0; background: repeating-conic-gradient(from 0deg at 88% 40%, var(--paper) 0deg 0.8deg, transparent 0.8deg 6deg); opacity: 0.1; -webkit-mask: radial-gradient(circle at 88% 40%, transparent 0 70px, #000 300px); mask: radial-gradient(circle at 88% 40%, transparent 0 70px, #000 300px); }
+footer .wrap { position: relative; }
+footer h2 { font-family: var(--display); font-weight: 400; font-size: clamp(2.2rem, 6vw, 4rem); line-height: 1.02; margin: 10px 0 16px; }
+footer h2 em { font-style: normal; color: var(--accent); }
+footer p { max-width: 58ch; color: #d9d4c9; margin: 0; }
+footer .links { display: flex; gap: 12px; margin-top: 26px; flex-wrap: wrap; }
+footer .links a { font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--paper); text-decoration: none; border: 2px solid var(--paper); padding: 11px 20px; box-shadow: 4px 4px 0 var(--accent); }
+footer .links a:hover { background: var(--paper); color: var(--ink); }
+footer .tbc { display: inline-block; margin-top: 36px; font-family: var(--hand); font-size: 1.8rem; color: var(--accent); transform: rotate(-3deg); }
+
+.lightbox { position: fixed; inset: 0; background: rgba(21,21,21,0.92); display: none; align-items: center; justify-content: center; padding: 24px; z-index: 50; cursor: zoom-out; }
+.lightbox.open { display: flex; }
+.lightbox img { max-width: 100%; max-height: 88vh; border: 4px solid var(--paper); }
 </style>
 </head>
 <body>
 
-<nav>
-  <div class="nav-logo">Hadiza ✦</div>
-  <ul class="nav-links">
-    <li><a href="#about">À propos</a></li>
-    <li><a href="#projects">Projets</a></li>
-    <li><a href="#design">Design</a></li>
-    <li><a href="#wip">En cours</a></li>
-    <li><a href="#parcours">Parcours</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-</nav>
-
-<div class="hero">
-  <div class="blob blob-1"></div>
-  <div class="blob blob-2"></div>
-  <div class="blob blob-3"></div>
-  <div class="hero-content">
-    <div class="hero-tag">Alternance sept. 2026 · Toute la France</div>
-    <h1>Hadiza Hamidou Ba</h1>
-    <p>2e année Informatique à ECE Paris · Spécialisation IA & Data Engineering · De la donnée brute à la décision concrète.</p>
-    <div class="hero-btns">
-      <a href="#projects" class="btn btn-primary">Voir mes projets</a>
-      <a href="#contact" class="btn btn-secondary">Me contacter</a>
-    </div>
-  </div>
-</div>
-
-<section id="about">
-  <div class="section-label">À propos</div>
-  <h2 class="section-title">Qui suis-je ?</h2>
-  <div class="about-grid">
-    <div class="about-text">
-      <p>Étudiante en 2e année de Bachelor Informatique à ECE Paris, je me spécialise en IA et Data Engineering dès ma 3e année. Passionnée par la donnée, de la collecte à l'analyse jusqu'à la décision, j'ai développé des compétences concrètes à travers des projets académiques, un hackathon de recherche et une expérience en santé publique internationale.</p>
-      <p>J'aime comprendre ce que les données disent et ce qu'elles permettent de faire. Ce qui m'anime : des projets data qui changent quelque chose.</p>
-      <p>Je recherche une <strong>alternance en Data / IA à partir de septembre 2026</strong> (rythme 2 semaines école / 3 semaines entreprise), partout en France. Ouverte aux postes de Data Analyst, Data Engineer ou ML/AI Engineer.</p>
-    </div>
-    <div>
-      <p style="font-size:.75rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:.8rem;">Stack technique</p>
-      <div class="skills-grid">
-        <span class="skill-pill pill-rose">Python</span>
-        <span class="skill-pill pill-lavender">pandas</span>
-        <span class="skill-pill pill-mint">scikit-learn</span>
-        <span class="skill-pill pill-peach">SQL</span>
-        <span class="skill-pill pill-rose">Elasticsearch</span>
-        <span class="skill-pill pill-lavender">Kibana</span>
-        <span class="skill-pill pill-mint">Docker</span>
-        <span class="skill-pill pill-peach">Power BI</span>
-        <span class="skill-pill pill-rose">Streamlit</span>
-        <span class="skill-pill pill-lavender">HuggingFace</span>
-        <span class="skill-pill pill-mint">DHIS2</span>
-        <span class="skill-pill pill-peach">Java</span>
-        <span class="skill-pill pill-rose">PHP · C</span>
-        <span class="skill-pill pill-lavender">MongoDB</span>
-        <span class="skill-pill pill-mint">Figma</span>
-        <span class="skill-pill pill-peach">HTML · CSS</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="projects">
-  <div class="section-label">Projets techniques</div>
-  <h2 class="section-title">Ce que j'ai construit</h2>
-
-  <!-- WMDP FEATURED -->
-  <div class="featured-card">
-    <div class="featured-badge">Projet phare · Hackathon TreeTech</div>
-    <h3>WMDP Benchmark — LLM Safety & Ethics Evaluation</h3>
-    <p class="desc">Évaluation de la robustesse éthique et sécuritaire de 6 grands modèles de langage (Llama 3.1, Llama 3.3, Llama 4, GPT-OSS, Kimi K2, Qwen3) sur le benchmark WMDP, couvrant biosécurité, chimie et cybersécurité. Contribution originale : évaluation contextuelle testant si le cadrage social d'une requête modifie le comportement des modèles. Résultat : aucun framing n'a suffi à contourner les filtres de sécurité de manière systématique.</p>
-    <div class="featured-grid">
-      <div class="featured-stat"><div class="stat-label">Modèles évalués</div><div class="stat-val">6 LLMs · Meta, OpenAI, Moonshot, Alibaba</div></div>
-      <div class="featured-stat"><div class="stat-label">Meilleur modèle</div><div class="stat-val">Kimi K2 · 77.33% accuracy</div></div>
-      <div class="featured-stat"><div class="stat-label">Phase 2 (original)</div><div class="stat-val">4 niveaux de cadrage × 3 domaines</div></div>
-      <div class="featured-stat"><div class="stat-label">Stack</div><div class="stat-val">Python · Groq API · ELK · Docker</div></div>
-    </div>
-    <div class="project-tags">
-      <span class="project-tag pill-rose">Python</span>
-      <span class="project-tag pill-rose">Groq API</span>
-      <span class="project-tag pill-rose">Elasticsearch</span>
-      <span class="project-tag pill-rose">Kibana</span>
-      <span class="project-tag pill-rose">Docker</span>
-      <span class="project-tag pill-rose">AI Safety</span>
-      <span class="project-tag pill-rose">LLMs</span>
-    </div>
-    <a href="https://github.com/Hadiza06/Hackaton-TreeTech" target="_blank" class="project-link">Voir sur GitHub →</a>
-  </div>
-
-  <div class="subsection-title">Data & IA</div>
-  <div class="projects-grid" style="margin-bottom:2rem;">
-    <div class="project-card card-rose">
-      <div class="project-icon icon-rose">🎬</div>
-      <h3>Analyse exploratoire · Films TMDB</h3>
-      <p>Analyse de 4800 films avec Python, pandas et Seaborn : distribution des notes, évolution de la production par année, top 10 des films les mieux notés. Nettoyage de données et manipulation de JSON avec ast.literal_eval().</p>
-      <div class="project-tags">
-        <span class="project-tag pill-rose">Python</span>
-        <span class="project-tag pill-rose">pandas</span>
-        <span class="project-tag pill-rose">Matplotlib</span>
-        <span class="project-tag pill-rose">Seaborn</span>
-        <span class="project-tag pill-rose">Jupyter</span>
-      </div>
-      <a href="https://github.com/Hadiza06/analyse-films-tmdb" target="_blank" class="project-link">GitHub →</a>
-    </div>
-    <div class="project-card card-lavender">
-      <div class="project-icon icon-lavender">📊</div>
-      <h3>Stack ELK · Visualisations</h3>
-      <p>Déploiement Elasticsearch / Kibana via Docker. Ingestion de données JSON/CSV, dashboards interactifs Kibana et Streamlit pour l'analyse de performances de modèles.</p>
-      <div class="project-tags">
-        <span class="project-tag pill-lavender">Docker</span>
-        <span class="project-tag pill-lavender">Kibana</span>
-        <span class="project-tag pill-lavender">Streamlit</span>
-      </div>
-    </div>
-    <div class="project-card card-mint">
-      <div class="project-icon icon-mint">🏥</div>
-      <h3>HISP Mali · Données de santé</h3>
-      <p>Analyse de données de santé publique sur DHIS2 pour soutenir la prise de décision opérationnelle. Formation d'équipes locales à des outils d'IA.</p>
-      <div class="project-tags">
-        <span class="project-tag pill-mint">DHIS2</span>
-        <span class="project-tag pill-mint">Data analysis</span>
-        <span class="project-tag pill-mint">Power BI</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- MSP PROJECT -->
-  <div class="featured-card" style="border-color:var(--mint); border-width:1.5px;">
-    <div class="featured-badge" style="background:var(--mint);color:var(--mint-dark);">Projet MSP · Sécurité des données</div>
-    <h3>Sécurisation des Bases de Données de Santé TCIM</h3>
-    <p class="desc">Conception en équipe de 4 d'une solution complète de protection de données médicales, intégrant IA, cryptographie et gestion des accès. Classification automatique des données sensibles, chiffrement AES-256, architecture Zero Trust avec RBAC et audit trail, conformité RGPD/HDS sur données fictives.</p>
-    <div class="featured-grid">
-      <div class="featured-stat"><div class="stat-label">Chiffrement</div><div class="stat-val">AES-256 · gestion sécurisée des clés</div></div>
-      <div class="featured-stat"><div class="stat-label">Architecture</div><div class="stat-val">Zero Trust · RBAC · Audit trail</div></div>
-      <div class="featured-stat"><div class="stat-label">IA</div><div class="stat-val">Classification auto · Scikit-learn</div></div>
-      <div class="featured-stat"><div class="stat-label">Conformité</div><div class="stat-val">RGPD · HDS</div></div>
-    </div>
-    <div class="project-tags">
-      <span class="project-tag pill-mint">Python</span>
-      <span class="project-tag pill-mint">Flask</span>
-      <span class="project-tag pill-mint">scikit-learn</span>
-      <span class="project-tag pill-mint">AES-256</span>
-      <span class="project-tag pill-mint">RBAC</span>
-      <span class="project-tag pill-mint">RGPD</span>
-    </div>
-    <a href="https://github.com/Hadiza06/projet-msp-tcim" target="_blank" class="project-link">Voir sur GitHub →</a>
-  </div>
-
-  <div class="subsection-title">Développement</div>
-  <div class="projects-grid">
-    <div class="project-card card-rose">
-      <div class="project-icon icon-rose">🍬</div>
-      <h3>CandyECE — Candy Crush (C)</h3>
-      <p>Clone terminal de Candy Crush en C, développé en équipe de 3. Grille 15×15 colorée ANSI, 4 niveaux avec obstacles et jokers, limite de temps 120 s, sauvegarde des scores.</p>
-      <div class="project-tags">
-        <span class="project-tag pill-rose">C</span>
-        <span class="project-tag pill-rose">Algorithmique</span>
-        <span class="project-tag pill-rose">Terminal</span>
-      </div>
-      <a href="https://github.com/Hadiza06/candy-crush-saga" target="_blank" class="project-link">GitHub →</a>
-    </div>
-    <div class="project-card card-lavender">
-      <div class="project-icon icon-lavender">🃏</div>
-      <h3>Memory Card (JavaFX)</h3>
-      <p>Jeu de mémoire avec interface JavaFX, authentification MySQL et plateau de cartes animées. Gestion des comptes joueurs et suivi du score en temps réel.</p>
-      <div class="project-tags">
-        <span class="project-tag pill-lavender">Java</span>
-        <span class="project-tag pill-lavender">JavaFX</span>
-        <span class="project-tag pill-lavender">MySQL</span>
-        <span class="project-tag pill-lavender">Maven</span>
-      </div>
-      <a href="https://github.com/Hadiza06/Memory-Card" target="_blank" class="project-link">GitHub →</a>
-    </div>
-    <div class="project-card card-mint">
-      <div class="project-icon icon-mint">📚</div>
-      <h3>UniLearn — Plateforme e-learning</h3>
-      <p>Application web PHP/MySQL avec authentification par rôle (étudiant, enseignant, admin). Cours, quiz, messagerie, forum. Mots de passe hashés, PDO sécurisé.</p>
-      <div class="project-tags">
-        <span class="project-tag pill-mint">PHP</span>
-        <span class="project-tag pill-mint">MySQL</span>
-        <span class="project-tag pill-mint">Bootstrap 5</span>
-        <span class="project-tag pill-mint">PDO</span>
-      </div>
-      <a href="https://github.com/Hadiza06/devWeb" target="_blank" class="project-link">GitHub →</a>
-    </div>
-  </div>
-</section>
-
-<section id="design">
-  <div class="section-label">Design & Créations</div>
-  <h2 class="section-title">Côté créatif</h2>
-
-  <!-- FLOWW FEATURED -->
-  <div class="featured-card" style="border-color:var(--lavender);">
-    <div class="featured-badge" style="background:var(--lavender);color:var(--lavender-dark);">Projet UX/UI complet · ECE Paris B2</div>
-    <h3>Floww · App bien-être musicale</h3>
-    <p class="desc">Application mobile de bien-être numérique centrée sur la musique. L'idée : plutôt que de parcourir une bibliothèque infinie, l'utilisateur répond à "Comment tu te sens ?" et reçoit une playlist adaptée à son état émotionnel. Système de design complet avec palette caméléon de 21 couleurs qui évolue selon 8 états émotionnels distincts. Logo créé sous Inkscape, prototype interactif haute fidélité sur Figma.</p>
-    <div class="featured-grid">
-      <div class="featured-stat"><div class="stat-label">Écrans</div><div class="stat-val">6 écrans · Splash, Onboarding, Accueil, Humeur, Explorer, Favoris</div></div>
-      <div class="featured-stat"><div class="stat-label">Design system</div><div class="stat-val">21 couleurs · 3 typographies · composants avec états</div></div>
-      <div class="featured-stat"><div class="stat-label">Logo</div><div class="stat-val">Inkscape · SVG vectoriel</div></div>
-      <div class="featured-stat"><div class="stat-label">Stack design</div><div class="stat-val">Figma · Inkscape · Phosphor Icons</div></div>
-    </div>
-    <div class="project-tags">
-      <span class="project-tag pill-lavender">Figma</span>
-      <span class="project-tag pill-lavender">Design system</span>
-      <span class="project-tag pill-lavender">Prototype HF</span>
-      <span class="project-tag pill-lavender">UX Research</span>
-      <span class="project-tag pill-lavender">Inkscape</span>
-      <span class="project-tag pill-lavender">UX émotionnelle</span>
-    </div>
-    <a href="https://www.figma.com/proto/oZQihj5edhnS2BH0u56tk7/Projet?node-id=52-5&p=f&t=kaLzTMQ3UGwTU7Sj-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=52%3A5" target="_blank" class="project-link">Voir le prototype Figma →</a>
-  </div>
-
-  <div class="design-grid">
-    <div class="design-card-simple">
-      <div class="design-preview-sm preview-wp">WordPress ✦</div>
-      <h3 style="font-size:.95rem;font-weight:800;margin-bottom:.4rem;">Sites WordPress</h3>
-      <p style="font-size:.82rem;color:var(--text-muted);line-height:1.6;margin-bottom:.8rem;">Création et personnalisation de sites WordPress : thèmes, mise en page, plugins et contenu éditorial.</p>
-      <div class="project-tags"><span class="project-tag pill-lavender">WordPress</span><span class="project-tag pill-lavender">HTML/CSS</span><span class="project-tag pill-lavender">Web design</span></div>
-    </div>
-    <div class="design-card-simple">
-      <div class="design-preview-sm preview-inkscape">Inkscape ✦</div>
-      <h3 style="font-size:.95rem;font-weight:800;margin-bottom:.4rem;">Illustrations vectorielles</h3>
-      <p style="font-size:.82rem;color:var(--text-muted);line-height:1.6;margin-bottom:.8rem;">Création de visuels et illustrations vectorielles avec Inkscape : logos, affiches, icônes personnalisées.</p>
-      <div class="project-tags"><span class="project-tag pill-peach">Inkscape</span><span class="project-tag pill-peach">Vectoriel</span><span class="project-tag pill-peach">Illustration</span></div>
-    </div>
-    <div class="design-card-simple">
-      <div class="design-preview-sm preview-gimp">GIMP ✦</div>
-      <h3 style="font-size:.95rem;font-weight:800;margin-bottom:.4rem;">Retouche & création GIMP</h3>
-      <p style="font-size:.82rem;color:var(--text-muted);line-height:1.6;margin-bottom:.8rem;">Retouche photo, création de visuels et compositions graphiques avec GIMP.</p>
-      <div class="project-tags"><span class="project-tag pill-mint">GIMP</span><span class="project-tag pill-mint">Retouche</span><span class="project-tag pill-mint">Graphisme</span></div>
-    </div>
-  </div>
-</section>
-
-<section id="wip">
-  <div class="section-label">En construction</div>
-  <h2 class="section-title">Projets en cours</h2>
-  <p style="font-size:.9rem;color:var(--text-muted);margin-bottom:2rem;line-height:1.7;">Ces projets sont actuellement en développement — ils seront complétés et déplacés dans la section principale dès qu'ils seront prêts.</p>
-  <div class="wip-grid">
-    <div class="wip-card">
-      <div class="wip-badge">En cours</div>
-      <h3>Anime Scraper · Python</h3>
-      <p>Web scraper Python pour extraire automatiquement des infos sur les animes depuis MyAnimeList : titres, notes, genres, synopsis. Un bon exercice de scraping et de manipulation de données.</p>
-      <div class="wip-progress"><div class="wip-progress-bar" style="width:55%"></div></div>
-      <div class="project-tags"><span class="project-tag pill-peach">Python</span><span class="project-tag pill-peach">BeautifulSoup</span><span class="project-tag pill-peach">Web scraping</span></div>
-      <a href="https://github.com/Hadiza06/Anime-scraper" target="_blank" class="project-link" style="margin-top:.4rem;display:inline-flex;">GitHub →</a>
-    </div>
-    <div class="wip-card">
-      <div class="wip-badge">En cours</div>
-      <h3>Advent of Code 2025</h3>
-      <p>Solutions aux puzzles algorithmiques d'Advent of Code 2025 en Python. Un défi quotidien pour pratiquer la logique, les structures de données et l'optimisation.</p>
-      <div class="wip-progress"><div class="wip-progress-bar" style="width:20%"></div></div>
-      <div class="project-tags"><span class="project-tag pill-peach">Python</span><span class="project-tag pill-peach">Algorithmique</span><span class="project-tag pill-peach">Problem solving</span></div>
-      <a href="https://github.com/Hadiza06/Adventure-Of-Code" target="_blank" class="project-link" style="margin-top:.4rem;display:inline-flex;">GitHub →</a>
-    </div>
-    <div class="wip-card">
-      <div class="wip-badge">En cours</div>
-      <h3>Maquette Figma · À venir</h3>
-      <p>Nouveau projet UX/UI en phase de recherche utilisateur et de conception des wireframes basse fidélité.</p>
-      <div class="wip-progress"><div class="wip-progress-bar" style="width:25%"></div></div>
-      <div class="project-tags"><span class="project-tag pill-peach">Figma</span><span class="project-tag pill-peach">UX Research</span></div>
-    </div>
-  </div>
-</section>
-
-<section id="parcours">
-  <div class="section-label">Parcours</div>
-  <h2 class="section-title">Mon chemin</h2>
-  <div class="timeline">
-    <div class="timeline-item">
-      <div class="timeline-dot"></div>
-      <div class="timeline-date">2024 – Présent</div>
-      <h3>ECE Paris</h3>
-      <span>Bachelor Informatique · Spécialisation IA & Data Engineering (3e année)</span>
-      <ul class="timeline-bullets">
-        <li>Hackathon TreeTech : benchmark WMDP sur 6 LLMs avec évaluation contextuelle originale</li>
-        <li>Projets Python, Java, C, PHP, SQL, Docker, HuggingFace</li>
-        <li>Recherche d'alternance à partir de septembre 2026</li>
+<header class="top">
+  <div class="wrap">
+    <a class="name" href="#top">Hadiza Hamidou BA<span>.</span></a>
+    <nav aria-label="Navigation principale">
+      <ul>
+        <li><a href="#parcours">Parcours</a></li>
+        <li><a href="#sommaire">Sommaire</a></li>
+        <li><a href="#hors-serie">Hors-série</a></li>
+        <li><a href="#fiche">Fiche technique</a></li>
+        <li><a href="#contact">Contact</a></li>
       </ul>
-    </div>
-    <div class="timeline-item">
-      <div class="timeline-dot lav"></div>
-      <div class="timeline-date">Juin – Août 2025 · 3 mois</div>
-      <h3>HISP Mali</h3>
-      <span>Stage · Data & IA</span>
-      <ul class="timeline-bullets">
-        <li>Utilisation de DHIS2 pour la collecte et le suivi de données de santé publique</li>
-        <li>Analyse de données pour orienter la prise de décision opérationnelle</li>
-        <li>Formation d'équipes locales à DHIS2 et à des outils d'IA</li>
-      </ul>
-    </div>
-    <div class="timeline-item">
-      <div class="timeline-dot mint"></div>
-      <div class="timeline-date">Nov. 2024 – Mai 2025</div>
-      <h3>La Camilienne · Paris 12e</h3>
-      <span>Bénévolat · Tutrice</span>
-      <p>Accompagnement scolaire au sein d'une association sportive, culturelle et sociale. Aide aux devoirs et adaptation de la pédagogie selon les niveaux.</p>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+<section class="cover tone">
+  <div class="wrap">
+    <div class="cover-grid">
+      <div class="panel c-title">
+        <div class="mono">Hadiza Hamidou BA &nbsp;/&nbsp; Data, technologie, projets</div>
+        <div>
+          <h1>Chaque jeu de données a une histoire. <em>Voici comment je l'explore.</em></h1>
+          <p>Étudiante en Bachelor Intelligence Artificielle à l'ECE Paris. Je transforme des données brutes en tableaux de bord, en modèles et en applications qui servent vraiment.</p>
+        </div>
+        <a class="cta" href="#sommaire">Ouvrir le volume 01 ↓</a>
+      </div>
+      <div class="panel c-side c-art">
+        <svg class="cover-art" viewBox="0 0 400 440" role="img" aria-label="Illustration, un écran entouré de fenêtres de graphiques et de flux de données">
+  <defs>
+    <pattern id="dots" width="7" height="7" patternUnits="userSpaceOnUse"><circle cx="3.5" cy="3.5" r="1.3" fill="var(--ink)" fill-opacity="0.35"/></pattern>
+    <pattern id="hatch2" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="6" stroke="var(--ink)" stroke-width="1.2"/></pattern>
+  </defs>
+  <!-- lignes de vitesse -->
+  <g stroke="var(--ink)" stroke-opacity="0.13" stroke-width="1.2">
+    <line x1="200" y1="250" x2="0" y2="0"/><line x1="200" y1="250" x2="60" y2="0"/><line x1="200" y1="250" x2="130" y2="0"/><line x1="200" y1="250" x2="270" y2="0"/><line x1="200" y1="250" x2="340" y2="0"/><line x1="200" y1="250" x2="400" y2="0"/><line x1="200" y1="250" x2="400" y2="70"/><line x1="200" y1="250" x2="400" y2="150"/><line x1="200" y1="250" x2="0" y2="70"/><line x1="200" y1="250" x2="0" y2="150"/><line x1="200" y1="250" x2="0" y2="230"/><line x1="200" y1="250" x2="400" y2="230"/>
+  </g>
+  <!-- flux de données -->
+  <g fill="none" stroke="var(--accent)" stroke-width="2" stroke-dasharray="5 6">
+    <path d="M180,232 C150,190 120,170 98,138"/>
+    <path d="M222,232 C250,180 280,150 300,124"/>
+    <path d="M250,262 C280,250 300,230 312,218"/>
+    <path d="M150,262 C120,252 100,240 92,232"/>
+  </g>
+  <g fill="var(--accent)" stroke="var(--ink)" stroke-width="1.2">
+    <rect x="127" y="168" width="8" height="8"/><rect x="262" y="166" width="8" height="8"/><rect x="290" y="236" width="7" height="7"/><rect x="112" y="244" width="7" height="7"/>
+  </g>
+  <!-- fenêtre 1 : barres -->
+  <g transform="rotate(-5 94 88)">
+    <rect x="24" y="38" width="144" height="100" fill="var(--white)" stroke="var(--ink)" stroke-width="2.5"/>
+    <rect x="24" y="38" width="144" height="15" fill="var(--ink)"/>
+    <circle cx="33" cy="45.5" r="2.5" fill="var(--paper)"/><circle cx="42" cy="45.5" r="2.5" fill="var(--paper)"/>
+    <g stroke="var(--ink)" stroke-width="1.5">
+      <rect x="40" y="104" width="16" height="24" fill="var(--tone)"/><rect x="62" y="90" width="16" height="38" fill="var(--tone)"/><rect x="84" y="70" width="16" height="58" fill="var(--accent)"/><rect x="106" y="94" width="16" height="34" fill="var(--tone)"/><rect x="128" y="110" width="16" height="18" fill="var(--tone)"/>
+    </g>
+    <line x1="34" y1="128" x2="158" y2="128" stroke="var(--ink)" stroke-width="2"/>
+  </g>
+  <!-- fenêtre 2 : courbe -->
+  <g transform="rotate(4 306 74)">
+    <rect x="230" y="24" width="152" height="102" fill="var(--white)" stroke="var(--ink)" stroke-width="2.5"/>
+    <rect x="230" y="24" width="152" height="15" fill="var(--ink)"/>
+    <circle cx="239" cy="31.5" r="2.5" fill="var(--paper)"/><circle cx="248" cy="31.5" r="2.5" fill="var(--paper)"/>
+    <path d="M242,112 L262,108 L280,110 L298,100 L314,96 L328,78 L342,64 L352,70 L366,84" fill="none" stroke="var(--ink)" stroke-width="2.2"/>
+    <path d="M242,112 L262,108 L280,110 L298,100 L314,96 L328,78 L342,64 L352,70 L366,84 L366,116 L242,116 Z" fill="url(#dots)"/>
+    <circle cx="342" cy="64" r="5" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.8"/>
+  </g>
+  <!-- fenêtre 3 : grille d'unités -->
+  <g transform="rotate(-3 316 196)">
+    <rect x="262" y="158" width="112" height="78" fill="var(--white)" stroke="var(--ink)" stroke-width="2.5"/>
+    <rect x="262" y="158" width="112" height="13" fill="var(--ink)"/>
+    <g stroke="var(--ink)" stroke-width="1.2">
+      <rect x="274" y="180" width="11" height="11" fill="var(--accent)"/><rect x="289" y="180" width="11" height="11" fill="var(--accent)"/><rect x="304" y="180" width="11" height="11" fill="var(--accent)"/><rect x="319" y="180" width="11" height="11" fill="var(--accent)"/><rect x="334" y="180" width="11" height="11" fill="var(--accent)"/><rect x="349" y="180" width="11" height="11" fill="var(--accent)"/>
+      <rect x="274" y="196" width="11" height="11" fill="var(--accent)"/><rect x="289" y="196" width="11" height="11" fill="var(--accent)"/><rect x="304" y="196" width="11" height="11" fill="var(--accent)"/><rect x="319" y="196" width="11" height="11" fill="var(--accent)"/><rect x="334" y="196" width="11" height="11" fill="url(#hatch2)"/><rect x="349" y="196" width="11" height="11" fill="url(#hatch2)"/>
+      <rect x="274" y="212" width="11" height="11" fill="var(--accent)"/><rect x="289" y="212" width="11" height="11" fill="var(--accent)"/><rect x="304" y="212" width="11" height="11" fill="url(#hatch2)"/><rect x="319" y="212" width="11" height="11" fill="var(--white)"/><rect x="334" y="212" width="11" height="11" fill="var(--white)"/><rect x="349" y="212" width="11" height="11" fill="var(--white)"/>
+    </g>
+  </g>
+  <!-- fenêtre 4 : anneau -->
+  <g transform="rotate(5 84 198)">
+    <rect x="30" y="160" width="104" height="80" fill="var(--white)" stroke="var(--ink)" stroke-width="2.5"/>
+    <rect x="30" y="160" width="104" height="13" fill="var(--ink)"/>
+    <circle cx="82" cy="207" r="22" fill="none" stroke="var(--tone)" stroke-width="10"/>
+    <path d="M82,185 A22,22 0 0 1 103.6,211" fill="none" stroke="var(--accent)" stroke-width="10"/>
+    <circle cx="82" cy="207" r="27" fill="none" stroke="var(--ink)" stroke-width="1.5"/><circle cx="82" cy="207" r="17" fill="none" stroke="var(--ink)" stroke-width="1.5"/>
+  </g>
+  <!-- écran -->
+  <rect x="128" y="232" width="144" height="92" fill="var(--white)" stroke="var(--ink)" stroke-width="3"/>
+  <rect x="136" y="240" width="128" height="76" fill="url(#dots)"/>
+  <g font-family="IBM Plex Mono, monospace" font-size="9" fill="var(--ink)" font-weight="600"><text x="146" y="274" font-size="22" fill="var(--accent)">!false</text><text x="146" y="292">// drôle parce que</text><text x="146" y="304">// c'est vrai</text></g>
+  <rect x="188" y="324" width="24" height="14" fill="var(--ink)"/>
+  <!-- post-it -->
+  <g transform="rotate(-7 76 296)">
+    <rect x="30" y="262" width="92" height="66" fill="var(--accent)" stroke="var(--ink)" stroke-width="2"/>
+    <rect x="62" y="256" width="28" height="10" fill="var(--tone)" fill-opacity="0.85"/>
+    <g font-family="IBM Plex Mono, monospace" font-size="10" font-weight="600" fill="var(--white)"><text x="40" y="284">Yes she</text><text x="40" y="298">can code</text><text x="40" y="316">^_^</text></g>
+  </g>
+  <g transform="rotate(5 332 268)">
+    <rect x="280" y="244" width="114" height="50" fill="var(--white)" stroke="var(--ink)" stroke-width="2"/>
+    <rect x="320" y="239" width="26" height="9" fill="var(--tone)" fill-opacity="0.85"/>
+    <g font-family="IBM Plex Mono, monospace" font-size="8.5" font-weight="600" fill="var(--ink)"><text x="288" y="260" fill="var(--accent)">Règle n°1 :</text><text x="288" y="273">si ça marche,</text><text x="288" y="286">on n'y touche plus</text></g>
+  </g>
+  <!-- bureau -->
+  <rect x="20" y="338" width="360" height="9" fill="var(--ink)"/>
+  <rect x="20" y="347" width="360" height="93" fill="url(#dots)"/>
+  <!-- tasse -->
+  <path d="M316,314 L340,314 L337,338 L319,338 Z" fill="var(--white)" stroke="var(--ink)" stroke-width="2.2"/>
+  <path d="M340,320 Q350,322 340,330" fill="none" stroke="var(--ink)" stroke-width="2.2"/>
+  <path d="M324,306 Q320,298 326,292 M332,306 Q328,298 334,292" fill="none" stroke="var(--ink)" stroke-width="1.5"/>
+</svg>
+
+        <div class="vol-badge"><b>Vol. 01</b><span>Projets sélectionnés</span></div>
+      </div>
+      <div class="panel c-status">
+        <div class="mono">Statut</div>
+        <p><span class="dot" aria-hidden="true"></span>Disponible pour une alternance dès que possible ou en stage de 5 à 6 mois dès mars 2027</p>
+      </div>
+      <div class="c-strip">
+        <div class="panel"><b>2</b><span>stages, en France et au Mali</span></div>
+        <div class="panel"><b class="acc">78 %</b><span>des fraudes repérées par mon modèle FraudDetect</span></div>
+        <div class="panel"><b>5</b><span>chapitres data dans ce volume</span></div>
+        <div class="panel"><b>AWS</b><span>Cloud Practitioner, décembre 2025</span></div>
+      </div>
     </div>
   </div>
 </section>
 
-<section id="contact">
-  <div class="section-label">Contact</div>
-  <h2 class="section-title" style="text-align:center;">Travaillons ensemble</h2>
-  <div class="contact-wrapper">
-    <p>Disponible en <strong>alternance à partir de septembre 2026</strong> (2 sem. école / 3 sem. entreprise), partout en France. Toujours curieuse d'un projet data qui change quelque chose.</p>
-    <div class="contact-links">
-      <a href="mailto:bhadizahamidou@gmail.com" class="contact-link link-rose">✉ Email</a>
-      <a href="https://www.linkedin.com/in/hadizahamidou/" target="_blank" class="contact-link link-lavender">in LinkedIn</a>
-      <a href="https://github.com/Hadiza06" target="_blank" class="contact-link link-mint">⌥ GitHub</a>
+<!-- Parcours -->
+<section class="chapter" id="parcours">
+  <div class="wrap">
+    <div class="ch-head"><div class="ch-num">00</div><div class="mono">Prologue</div><h2>Parcours<small>Deux stages, deux terrains très différents.</small></h2><p class="hook">Avant les projets, deux terrains, une équipe agile à distance et la santé publique au Mali.</p></div>
+    <div class="jobs">
+      <div class="panel job">
+        <div class="jh"><div class="mono">avril 2026 à juillet 2026, stage</div><h3>Développeuse Data &amp; Applications</h3><p>Skills4Mind, équipe agile de 4 à distance</p></div>
+        <ul>
+          <li>Développé une application web avec tableau de bord.</li>
+          <li>Fait évoluer la base de données vers un système plus robuste.</li>
+          <li>Écrit les requêtes qui calculent les statistiques de l'application.</li>
+          <li>Recueilli les besoins de 4 types d'utilisateurs.</li>
+          <li>Rédigé les tests et la documentation, en tenant compte du RGPD.</li>
+        </ul>
+        <div class="tools" style="padding:0 22px 20px"><span>Python</span><span>Flask</span><span>PostgreSQL</span><span>SQL</span><span>API</span></div>
+      </div>
+      <div class="panel job">
+        <div class="jh"><div class="mono">juin 2025 à août 2025, stage</div><h3>Chargée de Données &amp; Systèmes d'Information</h3><p>HISP Mali, données de santé publique</p></div>
+        <ul>
+          <li>Contrôlé la qualité des données de santé.</li>
+          <li>Produit des tableaux de bord sur la vaccination par district.</li>
+          <li>Rédigé des documents de cadrage, des plannings et des budgets.</li>
+          <li>Accompagné les utilisateurs de la plateforme.</li>
+          <li>Animé une formation à l'IA générative.</li>
+        </ul>
+        <div class="tools" style="padding:0 22px 20px"><span>DHIS2</span><span>Tableaux de bord</span><span>Gestion de projet</span></div>
+      </div>
     </div>
   </div>
 </section>
 
-<footer>
-  <p>✦ Hadiza Hamidou Ba · ECE Paris · 2026</p>
+<section class="toc" id="sommaire">
+  <div class="wrap">
+    <div class="vol"><h2>Sommaire</h2><span class="mono">Vol. 01, projets sélectionnés</span></div>
+    <ol>
+      <li><a href="#ch1"><span class="n">Chapitre 01</span><span class="t">FraudDetect<small>L'enquête sur les paiements frauduleux</small></span><span class="g">IA, machine learning</span></a></li>
+      <li><a href="#ch2"><span class="n">Chapitre 02</span><span class="t">AeroTrack<small>Piloter la production de trois usines</small></span><span class="g">Données, BI</span></a></li>
+      <li><a href="#ch3"><span class="n">Chapitre 03</span><span class="t">ETL COVID-19<small>La chaîne automatique des données</small></span><span class="g">Automatisation</span></a></li>
+      <li><a href="#ch4"><span class="n">Chapitre 04</span><span class="t">TreeTech<small>Le laboratoire des six IA</small></span><span class="g">IA générative</span></a></li>
+      <li><a href="#ch5"><span class="n">Chapitre 05</span><span class="t">Analyse TMDB<small>Ce que racontent des milliers de films</small></span><span class="g">Analyse de données</span></a></li>
+      <li><a href="#hors-serie"><span class="n">Hors-série</span><span class="t">Jeux, web et design<small>Cozy Café, Orris, Loft &amp; Marbre et les autres</small></span><span class="g">Créatif</span></a></li>
+          </ol>
+  </div>
+</section>
+
+<!-- Chapitre 1 -->
+<section class="chapter" id="ch1">
+  <div class="wrap">
+    <div class="ch-head"><div class="ch-num">01</div><div class="mono">Chapitre 01, dossier d'enquête</div><h2>FraudDetect<small>Repérer les fraudes cachées dans des dizaines de milliers de paiements.</small></h2><p class="hook">Sur 56 962 paiements, 98 fraudes se cachent. Combien le modèle va-t-il en attraper ?</p><a class="code-link" href="https://github.com/Hadiza06/FraudDetect">Voir le code sur GitHub →</a></div>
+    <div class="page">
+      <div class="panel has-tag s5"><span class="tag">Le dossier</span>
+        <p>Des paiements par carte bancaire, presque tous normaux. Les fraudes représentent <b>moins de 0,2 %</b> des transactions.</p>
+        <p>Les chercher à la main, c'est chercher une aiguille dans une botte de foin.</p>
+        <span class="note">98 fraudes sur 56 962 paiements de test</span>
+      </div>
+      <div class="panel has-tag dark s7"><span class="tag">Le problème</span>
+        <h3>Comment attraper un maximum de fraudes sans déclencher de fausses alertes ?</h3>
+        <p>Un modèle qui dit « tout est normal » aurait raison à 99,8 %, et ne servirait à rien. Il faut donc mesurer ce qu'il attrape vraiment.</p>
+      </div>
+      <div class="panel has-tag s4"><span class="tag">L'enquête</span>
+        <ol class="steps">
+          <li>Préparation des données<small>Séparation en données d'entraînement et de test</small></li>
+          <li>Entraînement d'un Random Forest<small>Un ensemble d'arbres de décision qui votent</small></li>
+          <li>Vérification sur des paiements jamais vus<small>Pour mesurer la fiabilité réelle</small></li>
+          <li>Restitution dans Power BI</li>
+        </ol>
+        <div class="tools"><span>Python</span><span>Random Forest</span><span>Power BI</span></div>
+      </div>
+      <div class="panel has-tag s8"><span class="tag">Résultats</span>
+        <div class="big">76 / 98<small>fraudes repérées, soit 78 %</small></div>
+        <div style="margin-top:16px"><svg viewBox="-2 -2 368 186" role="img" aria-label="Sur 98 fraudes, 76 repérées et 22 manquées">
+<defs><pattern id="hatch" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="5" stroke="var(--ink)" stroke-width="1.2"/></pattern></defs>
+<rect x="0" y="0" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="26" y="0" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="52" y="0" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="78" y="0" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="104" y="0" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="130" y="0" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="156" y="0" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="182" y="0" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="208" y="0" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="234" y="0" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="260" y="0" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="286" y="0" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="312" y="0" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="338" y="0" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="0" y="26" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="26" y="26" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="52" y="26" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="78" y="26" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="104" y="26" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="130" y="26" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="156" y="26" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="182" y="26" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="208" y="26" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="234" y="26" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="260" y="26" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="286" y="26" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="312" y="26" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="338" y="26" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="0" y="52" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="26" y="52" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="52" y="52" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="78" y="52" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="104" y="52" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="130" y="52" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="156" y="52" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="182" y="52" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="208" y="52" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="234" y="52" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="260" y="52" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="286" y="52" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="312" y="52" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="338" y="52" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="0" y="78" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="26" y="78" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="52" y="78" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="78" y="78" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="104" y="78" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="130" y="78" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="156" y="78" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="182" y="78" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="208" y="78" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="234" y="78" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="260" y="78" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="286" y="78" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="312" y="78" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="338" y="78" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="0" y="104" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="26" y="104" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="52" y="104" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="78" y="104" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="104" y="104" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="130" y="104" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="156" y="104" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="182" y="104" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="208" y="104" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="234" y="104" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="260" y="104" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="286" y="104" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="312" y="104" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="338" y="104" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="0" y="130" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="26" y="130" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="52" y="130" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="78" y="130" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="104" y="130" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="130" y="130" width="20" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="156" y="130" width="20" height="20" fill="url(#hatch)" stroke="var(--ink)" stroke-width="1.5"/><rect x="182" y="130" width="20" height="20" fill="url(#hatch)" stroke="var(--ink)" stroke-width="1.5"/><rect x="208" y="130" width="20" height="20" fill="url(#hatch)" stroke="var(--ink)" stroke-width="1.5"/><rect x="234" y="130" width="20" height="20" fill="url(#hatch)" stroke="var(--ink)" stroke-width="1.5"/><rect x="260" y="130" width="20" height="20" fill="url(#hatch)" stroke="var(--ink)" stroke-width="1.5"/><rect x="286" y="130" width="20" height="20" fill="url(#hatch)" stroke="var(--ink)" stroke-width="1.5"/><rect x="312" y="130" width="20" height="20" fill="url(#hatch)" stroke="var(--ink)" stroke-width="1.5"/><rect x="338" y="130" width="20" height="20" fill="url(#hatch)" stroke="var(--ink)" stroke-width="1.5"/><rect x="0" y="156" width="20" height="20" fill="url(#hatch)" stroke="var(--ink)" stroke-width="1.5"/><rect x="26" y="156" width="20" height="20" fill="url(#hatch)" stroke="var(--ink)" stroke-width="1.5"/><rect x="52" y="156" width="20" height="20" fill="url(#hatch)" stroke="var(--ink)" stroke-width="1.5"/><rect x="78" y="156" width="20" height="20" fill="url(#hatch)" stroke="var(--ink)" stroke-width="1.5"/><rect x="104" y="156" width="20" height="20" fill="url(#hatch)" stroke="var(--ink)" stroke-width="1.5"/><rect x="130" y="156" width="20" height="20" fill="url(#hatch)" stroke="var(--ink)" stroke-width="1.5"/><rect x="156" y="156" width="20" height="20" fill="url(#hatch)" stroke="var(--ink)" stroke-width="1.5"/><rect x="182" y="156" width="20" height="20" fill="url(#hatch)" stroke="var(--ink)" stroke-width="1.5"/><rect x="208" y="156" width="20" height="20" fill="url(#hatch)" stroke="var(--ink)" stroke-width="1.5"/><rect x="234" y="156" width="20" height="20" fill="url(#hatch)" stroke="var(--ink)" stroke-width="1.5"/><rect x="260" y="156" width="20" height="20" fill="url(#hatch)" stroke="var(--ink)" stroke-width="1.5"/><rect x="286" y="156" width="20" height="20" fill="url(#hatch)" stroke="var(--ink)" stroke-width="1.5"/><rect x="312" y="156" width="20" height="20" fill="url(#hatch)" stroke="var(--ink)" stroke-width="1.5"/><rect x="338" y="156" width="20" height="20" fill="url(#hatch)" stroke="var(--ink)" stroke-width="1.5"/></svg></div>
+        <div class="legend"><span><i class="a"></i>Fraude repérée (76)</span><span><i class="h"></i>Fraude manquée (22)</span></div>
+        <div class="fig"><b>Fig. 1.1</b> Chaque case est une fraude réelle du jeu de test</div>
+      </div>
+      <div class="panel has-tag s6"><span class="tag">Matrice de confusion</span>
+        <div class="matrix">
+          <div class="h"></div><div class="h">Prédit normal</div><div class="h">Prédit fraude</div>
+          <div class="h">Réel normal</div><div class="c ok"><b>56 863</b><span>bien classés</span></div><div class="c bad"><b>1</b><span>fausse alerte</span></div>
+          <div class="h">Réelle fraude</div><div class="c bad"><b>22</b><span>manquées</span></div><div class="c hit"><b>76</b><span>attrapées</span></div>
+        </div>
+        <div class="fig"><b>Fig. 1.2</b> Ce que le modèle a bien ou mal classé</div>
+      </div>
+      <div class="panel has-tag s6"><span class="tag">Les indices</span>
+        <svg viewBox="0 0 360 206" role="img" aria-label="Importance des variables, V14 en tête"><text x="0" y="17" class="lab">V14</text><rect x="44" y="3" width="238" height="20" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><text x="290" y="18" class="val">≈ 0,19</text><text x="0" y="51" class="lab">V10</text><rect x="44" y="37" width="137" height="20" fill="var(--tone)" stroke="var(--ink)" stroke-width="1.5"/><text x="189" y="52" class="val">≈ 0,11</text><text x="0" y="85" class="lab">V4</text><rect x="44" y="71" width="137" height="20" fill="var(--tone)" stroke="var(--ink)" stroke-width="1.5"/><text x="189" y="86" class="val">≈ 0,11</text><text x="0" y="119" class="lab">V12</text><rect x="44" y="105" width="125" height="20" fill="var(--tone)" stroke="var(--ink)" stroke-width="1.5"/><text x="177" y="120" class="val">≈ 0,1</text><text x="0" y="153" class="lab">V17</text><rect x="44" y="139" width="112" height="20" fill="var(--tone)" stroke="var(--ink)" stroke-width="1.5"/><text x="164" y="154" class="val">≈ 0,09</text><text x="0" y="187" class="lab">V3</text><rect x="44" y="173" width="88" height="20" fill="var(--tone)" stroke="var(--ink)" stroke-width="1.5"/><text x="140" y="188" class="val">≈ 0,07</text></svg>
+        <div class="fig"><b>Fig. 1.3</b> Les variables qui comptent le plus pour le modèle (valeurs arrondies)</div>
+      </div>
+      <div class="panel has-tag s12"><span class="tag">Dernière case</span>
+        <div class="page" style="gap:22px">
+          <div class="s7"><div class="bubble">Quand le modèle crie « fraude », il a raison 76 fois sur 77. Une seule fausse alerte sur 56 864 paiements normaux.</div></div>
+          <div class="s5"><p><b>Limite :</b> 22 fraudes passent encore entre les mailles. La prochaine étape serait d'ajuster le modèle pour en attraper plus, quitte à accepter quelques fausses alertes.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Chapitre 2 -->
+<section class="chapter tone" id="ch2">
+  <div class="wrap">
+    <div class="ch-head"><div class="ch-num">02</div><div class="mono">Chapitre 02, rapport de production</div><h2>AeroTrack<small>Un tableau de bord pour piloter trois usines aéronautiques.</small></h2><p class="hook">Trois usines, trois pièces, et près d'un tiers de la production en retard.</p><a class="code-link" href="https://github.com/Hadiza06/Aerotrack">Voir le code sur GitHub →</a></div>
+    <div class="page">
+      <div class="panel has-tag s5"><span class="tag">Le dossier</span>
+        <p>Trois sites, <b>Bordeaux, Tarnos et Gennevilliers</b>, fabriquent trois pièces, des harnais électriques, des nacelles et des aubes de turbine.</p>
+        <p>Pour les piloter, il faut suivre partout les mêmes indicateurs.</p>
+      </div>
+      <div class="panel has-tag dark s7"><span class="tag">La mission</span>
+        <h3>Créer des données de production réalistes, puis un tableau de bord qui calcule tout automatiquement.</h3>
+        <div class="tools"><span>Python</span><span>Power BI</span><span>DAX</span></div>
+      </div>
+      <div class="panel s3"><div class="big">500</div><p>lignes de production simulées</p></div>
+      <div class="panel s3"><div class="big">3,11 %</div><p>de taux de défaut</p></div>
+      <div class="panel s3"><div class="big">167</div><p>pièces défectueuses</p></div>
+      <div class="panel s3"><div class="big">168</div><p>commandes en attente</p></div>
+      <div class="panel has-tag s12"><span class="tag">Résultats</span>
+        <p style="margin-bottom:14px">Quantité produite selon le statut de la commande</p>
+        <svg viewBox="-2 -2 604 60" role="img" aria-label="Production par statut, en cours 35,57 %, livré 33,02 %, en retard 31,4 %"><rect x="0.0" y="0" width="213.4" height="56" fill="var(--tone)" stroke="var(--ink)" stroke-width="2"/><text x="10.0" y="24" class="lab">En cours</text><text x="10.0" y="45" class="val">35,57 %</text><rect x="213.4" y="0" width="198.1" height="56" fill="var(--paper)" stroke="var(--ink)" stroke-width="2"/><text x="223.4" y="24" class="lab">Livré</text><text x="223.4" y="45" class="val">33,02 %</text><rect x="411.5" y="0" width="188.5" height="56" fill="var(--accent)" stroke="var(--ink)" stroke-width="2"/><text x="421.5" y="24" class="lab">En retard</text><text x="421.5" y="45" class="val">31,4 %</text></svg>
+        <div class="fig"><b>Fig. 2.1</b> Près d'un tiers de la production est en retard, un signal à surveiller</div>
+      </div>
+      <div class="panel has-tag s12"><span class="tag">Le tableau de bord</span>
+        <img class="shot" src="img/aerotrack-dashboard.jpg" alt="Tableau de bord Power BI AeroTrack" loading="lazy">
+        <div class="fig"><b>Fig. 2.2</b> Capture du tableau de bord Power BI d'origine, par site, pièce, statut et date</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Chapitre 3 -->
+<section class="chapter" id="ch3">
+  <div class="wrap">
+    <div class="ch-head"><div class="ch-num">03</div><div class="mono">Chapitre 03, schéma de flux</div><h2>ETL COVID-19<small>Une chaîne automatique, de la source en ligne jusqu'au tableau de bord.</small></h2><p class="hook">Des données brutes en entrée, un tableau de bord propre en sortie, et une trace de chaque étape.</p><a class="code-link" href="https://github.com/Hadiza06/ETL-Covid">Voir le code sur GitHub →</a></div>
+    <div class="page">
+      <div class="panel has-tag s6"><span class="tag">Le dossier</span>
+        <p>Les chiffres du COVID-19 sont publiés en ligne sous une forme brute, difficile à lire et à analyser directement.</p>
+      </div>
+      <div class="panel has-tag dark s6"><span class="tag">La mission</span>
+        <p>Automatiser toute la chaîne, en gardant une trace de chaque étape pour retrouver vite une erreur.</p>
+      </div>
+      <div class="panel has-tag s12"><span class="tag">Le flux</span>
+        <div class="flow">
+          <div><b>Source en ligne</b><small>API</small></div>
+          <div><b>Lecture</b><small>JSON</small></div>
+          <div><b>Nettoyage</b><small>Pandas</small></div>
+          <div><b>Journal de bord</b><small>logging</small></div>
+          <div><b>Tableau de bord</b><small>Power BI</small></div>
+        </div>
+        <div class="fig"><b>Fig. 3.1</b> Les cinq étapes de la chaîne</div>
+      </div>
+      <div class="panel has-tag s12"><span class="tag">Dernière case</span>
+        <p>Une chaîne complète et traçable. Chaque exécution laisse une trace dans un fichier de logs, et le tableau de bord repose sur des données propres.</p>
+        <div class="tools"><span>Python</span><span>Pandas</span><span>API</span><span>JSON</span><span>logging</span><span>Power BI</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Chapitre 4 -->
+<section class="chapter tone" id="ch4">
+  <div class="wrap">
+    <div class="ch-head"><div class="ch-num">04</div><div class="mono">Chapitre 04, fiche d'expérience</div><h2>TreeTech<small>Six IA conversationnelles passées au même test.</small></h2><p class="hook">Six IA, une seule grille d'évaluation, et un temps limité pour les départager.</p><a class="code-link" href="https://github.com/Hadiza06/Hackaton-TreeTech">Voir le code sur GitHub →</a></div>
+    <div class="page">
+      <div class="panel has-tag s5"><span class="tag">Le dossier</span>
+        <p>Il existe de nombreuses IA capables de rédiger et de répondre à des questions, comme ChatGPT. Elles ne se valent pas toutes selon l'usage.</p>
+      </div>
+      <div class="panel has-tag dark s7"><span class="tag">Le protocole</span>
+        <p>Pendant un hackathon, en équipe et en temps limité, tester plusieurs de ces IA avec une même grille de critères.</p>
+        <div class="tools"><span>LLM</span><span>Évaluation comparative</span><span>Travail en équipe</span></div>
+      </div>
+      <div class="panel has-tag s12"><span class="tag">L'expérience</span>
+        <div class="lab6"><div>IA 1</div><div>IA 2</div><div>IA 3</div><div>IA 4</div><div>IA 5</div><div>IA 6</div></div>
+        <div class="fig"><b>Fig. 4.1</b> Six modèles, une seule grille d'évaluation</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Chapitre 5 -->
+<section class="chapter" id="ch5">
+  <div class="wrap">
+    <div class="ch-head"><div class="ch-num">05</div><div class="mono">Chapitre 05, analyse exploratoire</div><h2>Analyse TMDB<small>Ce que racontent des milliers de films.</small></h2><p class="hook">Des milliers de films, trois questions, trois graphiques pour y répondre.</p><a class="code-link" href="https://github.com/Hadiza06/analyse-films-tmdb">Voir le code sur GitHub →</a></div>
+    <div class="page">
+      <div class="panel has-tag s4"><span class="tag">Le dossier</span>
+        <p>La base TMDB rassemble des milliers de films avec leur date de sortie et leurs notes. Brute, elle ne raconte rien.</p>
+        <p>Trois questions simples : comment les films sont notés, combien sortent chaque année, et lesquels sont les mieux notés.</p>
+        <div class="tools"><span>Python</span><span>Visualisation</span></div>
+      </div>
+      <div class="panel has-tag s8"><span class="tag">Les notes</span>
+        <svg viewBox="0 0 600 300" role="img" aria-label="Répartition des notes moyennes des films, pic autour de 6,5"><line x1="46" x2="590" y1="262.0" y2="262.0" stroke="var(--ink)" stroke-opacity="0.12"/><text x="38" y="266.0" class="val" text-anchor="end">0</text><line x1="46" x2="590" y1="200.5" y2="200.5" stroke="var(--ink)" stroke-opacity="0.12"/><text x="38" y="204.5" class="val" text-anchor="end">200</text><line x1="46" x2="590" y1="139.0" y2="139.0" stroke="var(--ink)" stroke-opacity="0.12"/><text x="38" y="143.0" class="val" text-anchor="end">400</text><line x1="46" x2="590" y1="77.5" y2="77.5" stroke="var(--ink)" stroke-opacity="0.12"/><text x="38" y="81.5" class="val" text-anchor="end">600</text><line x1="46" x2="590" y1="16.0" y2="16.0" stroke="var(--ink)" stroke-opacity="0.12"/><text x="38" y="20.0" class="val" text-anchor="end">800</text><rect x="87.2" y="259.2" width="24.4" height="2.8" fill="var(--tone)" stroke="var(--ink)" stroke-width="1.5"/><rect x="107.2" y="259.2" width="24.4" height="2.8" fill="var(--tone)" stroke="var(--ink)" stroke-width="1.5"/><rect x="124.8" y="258.0" width="24.4" height="4.0" fill="var(--tone)" stroke="var(--ink)" stroke-width="1.5"/><rect x="152.0" y="258.0" width="24.4" height="4.0" fill="var(--tone)" stroke="var(--ink)" stroke-width="1.5"/><rect x="178.4" y="258.0" width="24.4" height="4.0" fill="var(--tone)" stroke="var(--ink)" stroke-width="1.5"/><rect x="204.0" y="246.0" width="24.4" height="16.0" fill="var(--tone)" stroke="var(--ink)" stroke-width="1.5"/><rect x="230.4" y="239.2" width="24.4" height="22.8" fill="var(--tone)" stroke="var(--ink)" stroke-width="1.5"/><rect x="257.6" y="225.4" width="24.4" height="36.6" fill="var(--tone)" stroke="var(--ink)" stroke-width="1.5"/><rect x="284.0" y="209.4" width="24.4" height="52.6" fill="var(--tone)" stroke="var(--ink)" stroke-width="1.5"/><rect x="309.6" y="127.3" width="24.4" height="134.7" fill="var(--tone)" stroke="var(--ink)" stroke-width="1.5"/><rect x="336.8" y="107.9" width="24.4" height="154.1" fill="var(--tone)" stroke="var(--ink)" stroke-width="1.5"/><rect x="363.2" y="77.2" width="24.4" height="184.8" fill="var(--tone)" stroke="var(--ink)" stroke-width="1.5"/><rect x="388.8" y="18.2" width="24.4" height="243.8" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><rect x="415.2" y="86.7" width="24.4" height="175.3" fill="var(--tone)" stroke="var(--ink)" stroke-width="1.5"/><rect x="441.6" y="118.1" width="24.4" height="143.9" fill="var(--tone)" stroke="var(--ink)" stroke-width="1.5"/><rect x="468.8" y="137.5" width="24.4" height="124.5" fill="var(--tone)" stroke="var(--ink)" stroke-width="1.5"/><rect x="494.4" y="214.0" width="24.4" height="48.0" fill="var(--tone)" stroke="var(--ink)" stroke-width="1.5"/><rect x="520.8" y="239.2" width="24.4" height="22.8" fill="var(--tone)" stroke="var(--ink)" stroke-width="1.5"/><rect x="547.2" y="255.2" width="24.4" height="6.8" fill="var(--tone)" stroke="var(--ink)" stroke-width="1.5"/><text x="54.0" y="280" class="val" text-anchor="middle">2</text><text x="134.0" y="280" class="val" text-anchor="middle">3</text><text x="214.0" y="280" class="val" text-anchor="middle">4</text><text x="294.0" y="280" class="val" text-anchor="middle">5</text><text x="374.0" y="280" class="val" text-anchor="middle">6</text><text x="454.0" y="280" class="val" text-anchor="middle">7</text><text x="534.0" y="280" class="val" text-anchor="middle">8</text><line x1="46" x2="590" y1="262" y2="262" stroke="var(--ink)" stroke-width="2"/><text x="323.0" y="298" class="lab" text-anchor="middle">Note moyenne</text><path d="M332,40 Q372,30 394,50" fill="none" stroke="var(--accent)" stroke-width="2"/><text x="326" y="46" class="hand" text-anchor="end">le pic, autour de 6,5</text></svg><div class="fig"><b>Fig. 5.1</b> La plupart des films ont une note entre 5,5 et 7,5 <span style="opacity:.7">(redessiné à partir de mon graphique d'origine, valeurs relevées)</span></div>
+      </div>
+      <div class="panel has-tag s6"><span class="tag">Les années</span>
+        <svg viewBox="0 0 600 280" role="img" aria-label="Nombre de films sortis par année, envol à partir des années 1990, maximum vers 2009"><line x1="46" x2="590" y1="240.0" y2="240.0" stroke="var(--ink)" stroke-opacity="0.12"/><text x="38" y="244.0" class="val" text-anchor="end">0</text><line x1="46" x2="590" y1="184.0" y2="184.0" stroke="var(--ink)" stroke-opacity="0.12"/><text x="38" y="188.0" class="val" text-anchor="end">60</text><line x1="46" x2="590" y1="128.0" y2="128.0" stroke="var(--ink)" stroke-opacity="0.12"/><text x="38" y="132.0" class="val" text-anchor="end">120</text><line x1="46" x2="590" y1="72.0" y2="72.0" stroke="var(--ink)" stroke-opacity="0.12"/><text x="38" y="76.0" class="val" text-anchor="end">180</text><line x1="46" x2="590" y1="16.0" y2="16.0" stroke="var(--ink)" stroke-opacity="0.12"/><text x="38" y="20.0" class="val" text-anchor="end">240</text><path d="M51.3,240 L51.3,239.1 L56.7,239.1 L62.0,239.1 L67.3,239.1 L72.7,239.1 L78.0,239.1 L83.3,239.1 L88.7,239.1 L94.0,239.1 L99.3,239.1 L104.7,239.1 L110.0,239.1 L115.3,238.1 L120.7,238.1 L126.0,239.1 L131.3,239.1 L136.7,239.1 L142.0,238.1 L147.3,239.1 L152.7,239.1 L158.0,237.2 L163.3,237.2 L168.7,238.1 L174.0,237.2 L179.3,237.2 L184.7,238.1 L190.0,237.2 L195.3,237.2 L200.7,237.2 L206.0,237.2 L211.3,237.2 L216.7,237.2 L222.0,237.2 L227.3,237.2 L232.7,238.1 L238.0,237.2 L243.3,235.3 L248.7,235.3 L254.0,236.3 L259.3,237.2 L264.7,237.2 L270.0,237.2 L275.3,238.1 L280.7,237.2 L286.0,236.3 L291.3,234.4 L296.7,233.5 L302.0,232.5 L307.3,231.6 L312.7,232.5 L318.0,234.4 L323.3,235.3 L328.7,230.7 L334.0,231.6 L339.3,229.7 L344.7,231.6 L350.0,231.6 L355.3,231.6 L360.7,232.5 L366.0,233.5 L371.3,230.7 L376.7,226.0 L382.0,226.9 L387.3,225.1 L392.7,219.5 L398.0,214.8 L403.3,218.5 L408.7,220.4 L414.0,213.9 L419.3,213.9 L424.7,214.8 L430.0,212.0 L435.3,212.0 L440.7,210.1 L446.0,212.9 L451.3,212.0 L456.7,206.4 L462.0,197.1 L467.3,187.7 L472.7,173.7 L478.0,156.0 L483.3,143.9 L488.7,126.1 L494.0,103.7 L499.3,91.6 L504.7,78.5 L510.0,71.1 L515.3,86.0 L520.7,68.3 L526.0,55.2 L531.3,43.1 L536.7,61.7 L542.0,42.1 L547.3,30.9 L552.7,43.1 L558.0,51.5 L563.3,59.9 L568.7,50.5 L574.0,62.7 L579.3,90.7 L584.7,131.7 L584.7,240 Z" fill="var(--tone)" fill-opacity="0.6"/><polyline points="51.3,239.1 56.7,239.1 62.0,239.1 67.3,239.1 72.7,239.1 78.0,239.1 83.3,239.1 88.7,239.1 94.0,239.1 99.3,239.1 104.7,239.1 110.0,239.1 115.3,238.1 120.7,238.1 126.0,239.1 131.3,239.1 136.7,239.1 142.0,238.1 147.3,239.1 152.7,239.1 158.0,237.2 163.3,237.2 168.7,238.1 174.0,237.2 179.3,237.2 184.7,238.1 190.0,237.2 195.3,237.2 200.7,237.2 206.0,237.2 211.3,237.2 216.7,237.2 222.0,237.2 227.3,237.2 232.7,238.1 238.0,237.2 243.3,235.3 248.7,235.3 254.0,236.3 259.3,237.2 264.7,237.2 270.0,237.2 275.3,238.1 280.7,237.2 286.0,236.3 291.3,234.4 296.7,233.5 302.0,232.5 307.3,231.6 312.7,232.5 318.0,234.4 323.3,235.3 328.7,230.7 334.0,231.6 339.3,229.7 344.7,231.6 350.0,231.6 355.3,231.6 360.7,232.5 366.0,233.5 371.3,230.7 376.7,226.0 382.0,226.9 387.3,225.1 392.7,219.5 398.0,214.8 403.3,218.5 408.7,220.4 414.0,213.9 419.3,213.9 424.7,214.8 430.0,212.0 435.3,212.0 440.7,210.1 446.0,212.9 451.3,212.0 456.7,206.4 462.0,197.1 467.3,187.7 472.7,173.7 478.0,156.0 483.3,143.9 488.7,126.1 494.0,103.7 499.3,91.6 504.7,78.5 510.0,71.1 515.3,86.0 520.7,68.3 526.0,55.2 531.3,43.1 536.7,61.7 542.0,42.1 547.3,30.9 552.7,43.1 558.0,51.5 563.3,59.9 568.7,50.5 574.0,62.7 579.3,90.7 584.7,131.7" fill="none" stroke="var(--ink)" stroke-width="2"/><circle cx="547.3" cy="30.9" r="6" fill="var(--accent)" stroke="var(--ink)" stroke-width="2"/><text x="535.3" y="18.9" class="hand" text-anchor="end">vers 2009, le maximum</text><line x1="446.0" x2="446.0" y1="46" y2="240" stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="4 4"/><text x="438.0" y="60" class="hand" text-anchor="end">années 1990, l'envol</text><text x="72.7" y="258" class="val" text-anchor="middle">1920</text><text x="179.3" y="258" class="val" text-anchor="middle">1940</text><text x="286.0" y="258" class="val" text-anchor="middle">1960</text><text x="392.7" y="258" class="val" text-anchor="middle">1980</text><text x="499.3" y="258" class="val" text-anchor="middle">2000</text><text x="606.0" y="258" class="val" text-anchor="middle">2020</text><line x1="46" x2="590" y1="240" y2="240" stroke="var(--ink)" stroke-width="2"/></svg><div class="fig"><b>Fig. 5.2</b> Nombre de films sortis par année <span style="opacity:.7">(redessiné à partir de mon graphique d'origine, valeurs relevées)</span></div>
+      </div>
+      <div class="panel has-tag s6"><span class="tag">Le top 10</span>
+        <svg viewBox="0 0 600 272" role="img" aria-label="Top 10 des films les mieux notés, The Shawshank Redemption en tête avec 8,5"><text x="180" y="16" class="val" text-anchor="end">1. The Shawshank Redemption</text><rect x="190" y="3" width="306.0" height="18" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/><text x="504.0" y="17" class="lab">8,5</text><text x="180" y="43" class="val" text-anchor="end">2. The Godfather</text><rect x="190" y="30" width="302.4" height="18" fill="var(--tone)" stroke="var(--ink)" stroke-width="1.5"/><text x="500.4" y="44" class="lab">8,4</text><text x="180" y="70" class="val" text-anchor="end">3. Fight Club</text><rect x="190" y="57" width="298.8" height="18" fill="var(--tone)" stroke="var(--ink)" stroke-width="1.5"/><text x="496.8" y="71" class="lab">8,3</text><text x="180" y="97" class="val" text-anchor="end">4. Schindler&#39;s List</text><rect x="190" y="84" width="298.8" height="18" fill="var(--tone)" stroke="var(--ink)" stroke-width="1.5"/><text x="496.8" y="98" class="lab">8,3</text><text x="180" y="124" class="val" text-anchor="end">5. Spirited Away</text><rect x="190" y="111" width="298.8" height="18" fill="var(--tone)" stroke="var(--ink)" stroke-width="1.5"/><text x="496.8" y="125" class="lab">8,3</text><text x="180" y="151" class="val" text-anchor="end">6. The Godfather: Part II</text><rect x="190" y="138" width="298.8" height="18" fill="var(--tone)" stroke="var(--ink)" stroke-width="1.5"/><text x="496.8" y="152" class="lab">8,3</text><text x="180" y="178" class="val" text-anchor="end">7. Pulp Fiction</text><rect x="190" y="165" width="298.8" height="18" fill="var(--tone)" stroke="var(--ink)" stroke-width="1.5"/><text x="496.8" y="179" class="lab">8,3</text><text x="180" y="205" class="val" text-anchor="end">8. Whiplash</text><rect x="190" y="192" width="298.8" height="18" fill="var(--tone)" stroke="var(--ink)" stroke-width="1.5"/><text x="496.8" y="206" class="lab">8,3</text><text x="180" y="232" class="val" text-anchor="end">9. The Dark Knight</text><rect x="190" y="219" width="295.2" height="18" fill="var(--tone)" stroke="var(--ink)" stroke-width="1.5"/><text x="493.2" y="233" class="lab">8,2</text><text x="180" y="259" class="val" text-anchor="end">10. The Green Mile</text><rect x="190" y="246" width="295.2" height="18" fill="var(--tone)" stroke="var(--ink)" stroke-width="1.5"/><text x="493.2" y="260" class="lab">8,2</text></svg><div class="fig"><b>Fig. 5.3</b> Les 10 films les mieux notés, sur 10</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Hors-série -->
+<section class="chapter tone" id="hors-serie">
+  <div class="wrap">
+    <div class="ch-head"><div class="ch-num">HS</div><div class="mono">Hors-série</div><h2>Jeux, web et design<small>L'autre côté de mon travail, construire des choses qu'on a envie d'utiliser.</small></h2><p class="hook">Des jeux, une boutique en ligne et du design, pour montrer l'autre côté de mon travail.</p></div>
+    <div class="extra">
+      <div class="panel e-cozy">
+        <img src="img/cozy-vue.jpg" alt="Le village et le café de Cozy Café" loading="lazy">
+        <div class="txt"><span class="mono">Jeu Roblox</span><h3>Cozy Café <span class="wip">en cours</span></h3>
+          <p>Un jeu de gestion où chaque joueur tient son café. Clients animaux et leurs commandes, recettes, boutique d'améliorations, employés, niveaux, mode décoration, et des personnages modélisés dans Blender. Pas encore publié.</p>
+          <div class="tools"><span>Roblox Studio</span><span>Luau</span><span>Blender</span></div>
+        </div>
+        <div class="cozy-more">
+          <img src="img/cozy-commande.jpg" alt="Carnet de commande" loading="lazy">
+          <img src="img/cozy-boutique.jpg" alt="Boutique d'améliorations" loading="lazy">
+          <img src="img/cozy-deco.jpg" alt="Mode décoration" loading="lazy">
+          <img src="img/cozy-equipe.jpg" alt="Employés du café" loading="lazy">
+          <img src="img/cozy-multi.jpg" alt="Café d'un autre joueur" loading="lazy">
+          <img src="img/cozy-blender.jpg" alt="Personnage modélisé dans Blender" loading="lazy">
+        </div>
+      </div>
+      <div class="panel e4">
+        <img src="img/orris-boutique.jpg" alt="Boutique Orris" loading="lazy">
+        <div class="txt"><span class="mono">E-commerce</span><h3>Orris</h3><p>Boutique en ligne fictive de bijoux, du catalogue jusqu'au paiement par carte en mode test.</p><div class="tools"><span>WordPress</span><span>WooCommerce</span><span>Stripe</span></div></div>
+      </div>
+      <div class="panel e4">
+        <img src="img/design-figma.jpg" alt="Écrans de l'application Loft et Marbre" loading="lazy">
+        <div class="txt"><span class="mono">Design et UX</span><h3>Loft &amp; Marbre</h3><p>Logo et application mobile pour une agence fictive de décoration. <a href="https://www.figma.com/proto/DTxkzmJ2qPZI9OjaaXj7iX/Untitled?page-id=0%3A1&amp;node-id=10-59&amp;p=f&amp;viewport=584%2C64%2C0.65&amp;t=CRwwnY5YJFZ6Lc6r-1&amp;scaling=scale-down&amp;content-scaling=fixed">Voir le prototype</a></p><div class="tools"><span>Figma</span></div></div>
+      </div>
+      <div class="panel e3">
+        <img src="img/design-logo.jpg" alt="Variations du logo Loft et Marbre" loading="lazy">
+        <div class="txt"><span class="mono">Identité visuelle</span><h3>Logo LM</h3><p>4 variations de forme.</p></div>
+      </div>
+      <div class="panel e3">
+        <img src="img/design-affiche.jpg" alt="Affiche Sous les pixels" loading="lazy">
+        <div class="txt"><span class="mono">Affiche</span><h3>Sous les pixels</h3><p>Atelier de sensibilisation au cyberharcèlement.</p></div>
+      </div>
+      <div class="panel e3">
+        <img src="img/design-variations.jpg" alt="Six variations de couleurs d'un paysage" loading="lazy">
+        <div class="txt"><span class="mono">Couleurs</span><h3>Variations</h3><p>Un paysage, 6 ambiances.</p><div class="tools"><span>GIMP</span></div></div>
+      </div>
+      <div class="panel e3">
+        <img src="img/godot-jeu.jpg" alt="Jeu de plateforme sous Godot" loading="lazy">
+        <div class="txt"><span class="mono">Jeu 2D</span><h3>Plateforme</h3><p>Personnage animé et caméra qui suit le joueur. <a href="https://github.com/Hadiza06/Godot-first">Code</a></p><div class="tools"><span>Godot 4</span></div></div>
+      </div>
+      <div class="panel e6">
+        <img src="img/memory.jpg" alt="Jeu Memory Card" loading="lazy">
+        <div class="txt"><span class="mono">Jeu desktop</span><h3>Memory Card</h3><p>Jeu de mémoire avec cartes animées, comptes joueurs reliés à MySQL et suivi du score en temps réel. <a href="https://github.com/Hadiza06/Memory-Card">Voir le code</a></p><div class="tools"><span>Java</span><span>JavaFX</span><span>MySQL</span><span>Maven</span></div></div>
+      </div>
+      <div class="panel e6">
+        <div class="txt" style="padding:22px">
+          <span class="mono">Et aussi</span>
+          <h3>Dans les archives</h3><a class="code-link" style="margin:4px 0 0" href="https://github.com/Hadiza06">Tout mon GitHub →</a>
+          <ul class="archive">
+            <li><b>Floww</b>, une application mobile de bien-être musical conçue sur Figma, avec un design system de 21 couleurs qui change selon l'humeur. <a href="https://github.com/Hadiza06/Floww">Code</a></li>
+            <li><b>CandyECE</b>, un Candy Crush en C dans le terminal, en équipe de 3, avec 4 niveaux, obstacles, jokers et sauvegarde des scores. <a href="https://github.com/Hadiza06/candy-crush-saga">Code</a></li>
+            <li><b>UniLearn</b>, une plateforme e-learning en PHP et MySQL, avec rôles, cours, quiz, messagerie et forum. <a href="https://github.com/Hadiza06/devWeb">Code</a></li>
+            <li><b>Anime Scraper</b>, un script Python qui récupère titres, notes et genres d'animes sur le web. <a href="https://github.com/Hadiza06/Anime-scraper">Code</a></li>
+            <li><b>Advent of Code</b>, des puzzles d'algorithmique résolus en Python. <a href="https://github.com/Hadiza06/Adventure-Of-Code">Code</a></li>
+            <li><b>Détection de pneumonie</b> <span class="wip">en cours</span>, sur des images médicales. <a href="https://github.com/Hadiza06/pneumonia-detection">Code</a></li>
+            <li><b>Émotions faciales</b>, une IA qui reconnaît les émotions sur des visages, et <b>Flowly</b>, une application web Django. <a href="https://github.com/Hadiza06/Flowly">Code</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Fiche technique -->
+<section class="chapter tone" id="fiche">
+  <div class="wrap">
+    <div class="ch-head"><div class="ch-num">FT</div><div class="mono">Fiche technique</div><h2>Compétences et outils<small>En rouge, ce que je maîtrise le mieux.</small></h2><p class="hook">Tout ce que j'utilise, classé honnêtement.</p></div>
+    <div class="sheet">
+      <div class="panel"><h3>Données et BI</h3><ul><li class="k">Python</li><li class="k">SQL</li><li class="k">Power BI</li><li>Pandas</li><li>DAX</li><li>PostgreSQL</li><li class="k">Excel</li><li class="k">Google Sheets</li><li>Power Query (notions)</li><li>DHIS2</li></ul></div>
+      <div class="panel"><h3>IA et machine learning</h3><ul><li>Random Forest</li><li>Régression logistique</li><li>PyTorch</li><li>IA générative</li><li>Gemini Pro</li><li>NotebookLM</li><li>RAG (notions)</li></ul></div>
+      <div class="panel"><h3>Développement</h3><ul><li>Flask</li><li>Django</li><li>API REST</li><li>Java, JavaFX</li><li>PHP</li><li>C</li><li>MySQL</li><li>WordPress</li><li class="k">Git</li><li class="k">Ligne de commande</li></ul></div>
+      <div class="panel"><h3>Jeux et design</h3><ul><li>Roblox Studio, Luau</li><li>Godot</li><li>Blender</li><li>Figma</li><li>GIMP</li></ul></div>
+      <div class="panel wide"><h3>Formation, Bachelor Intelligence Artificielle, ECE Paris</h3><p style="margin:0 0 12px;color:var(--muted)">Bac+3, grade licence, 3e année en cours. Modules clés du programme :</p>
+        <ul><li>SQL et administration de bases</li><li>NoSQL</li><li>Exploration des données avec Python</li><li>Datamining</li><li>Statistiques et probabilités</li><li>IA appliquée</li><li>Machine learning avancé</li><li>Deep learning avancé</li><li>Python avancé et librairies IA</li><li>Workflows IA</li><li>Algèbre linéaire</li><li>Web front, back et ReactJS</li><li>Full stack</li><li>Architecture logicielle</li><li>Linux et déploiement IA</li><li>Cloud et réseaux pour l'IA</li><li>Architectures IA distribuées</li><li>Systèmes sécurisés</li><li>Gestion de projet Agile</li><li>Hackathons</li><li>Projet de fin d'études</li><li>IA responsable et RGPD</li></ul>
+      </div>
+      <div class="panel" style="grid-column: span 2"><h3>Cloud</h3><p style="margin:0"><b>AWS Cloud Practitioner</b><br>Amazon Web Services, décembre 2025</p></div>
+      <div class="panel wide"><h3>Certifications</h3>
+        <ul class="certs">
+          <li class="k">AWS Cloud Practitioner<small>Amazon Web Services, décembre 2025</small></li>
+          <li>Intelligence artificielle, examen final<small>Liora, mars 2026</small></li>
+          <li>Prompt Engineering, niveau 1<small>Liora, décembre 2025</small></li>
+          <li>Programmation, niveau 1<small>Liora, octobre 2025</small></li>
+          <li>No Code TechAway, niveau 1<small>Liora, décembre 2024</small></li>
+          <li>Google Sheets Marketing<small>Liora, novembre 2024</small></li>
+          <li>Google Sheets, No Code<small>Liora, octobre 2024</small></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="mono" style="color:var(--tone)">Contact</div>
+    <h2>La suite s'écrit <em>avec vous.</em></h2>
+    <p>Je recherche une alternance dès que possible, ou un stage de 5 à 6 mois à partir de mars 2027, en Data Analyst, Data Engineer ou AI Engineer junior.</p>
+    <div class="links"><a href="https://www.linkedin.com/in/hadizahamidou/">LinkedIn</a><a href="https://github.com/Hadiza06">GitHub</a><a href="mailto:bhadizahamidou@gmail.com">E-mail</a></div>
+    <p style="margin-top:16px;font-family:var(--mono);font-size:0.85rem">bhadizahamidou@gmail.com</p>
+    <div class="tbc">À suivre dans le volume 02…</div>
+  </div>
 </footer>
 
+<div class="lightbox" id="lb" role="dialog" aria-modal="true" aria-label="Image agrandie"><img id="lb-img" alt=""></div>
+<script>
+(function () {
+  var lb = document.getElementById('lb'), lbi = document.getElementById('lb-img');
+  document.querySelectorAll('img.shot, .extra img').forEach(function (img) {
+    img.addEventListener('click', function () { lbi.src = img.src; lbi.alt = img.alt; lb.classList.add('open'); });
+  });
+  lb.addEventListener('click', function () { lb.classList.remove('open'); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') lb.classList.remove('open'); });
+})();
+</script>
 </body>
 </html>
