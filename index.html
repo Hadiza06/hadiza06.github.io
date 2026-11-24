@@ -201,7 +201,7 @@ svg .hand { font-family: var(--hand); font-size: 19px; fill: var(--accent); }
 
 /* Fins de chapitre */
 .ch-end { display: flex; justify-content: flex-end; align-items: center; gap: 18px; margin-top: 28px; }
-.ch-end .pg { font-family: var(--hand); font-size: 1.3rem; color: var(--muted); margin-right: auto; }
+.ch-end .pg { font-family: var(--hand); font-size: 1.3rem; color: var(--muted); margin-right: auto; white-space: nowrap; }
 .next { display: grid; grid-template-columns: 1fr auto; gap: 2px 18px; align-items: center; text-decoration: none; border: var(--line); background: var(--white); padding: 14px 20px; box-shadow: 5px 5px 0 var(--ink); transition: transform .12s, box-shadow .12s; max-width: 440px; }
 .next:hover { transform: translate(-3px, -3px); box-shadow: 8px 8px 0 var(--accent); }
 .next .mono { color: var(--accent); font-weight: 600; }
@@ -288,7 +288,7 @@ svg .hand { font-family: var(--hand); font-size: 19px; fill: var(--accent); }
 .certs li { border: none !important; padding: 6px 0 !important; border-bottom: 1px dashed var(--tone) !important; font-family: var(--body) !important; font-size: 0.9rem !important; }
 .certs li small { display: block; font-family: var(--mono); font-size: 0.68rem; color: var(--muted); }
 .certs li.k { background: none !important; color: var(--accent) !important; font-weight: 700; }
-@media (max-width: 860px) { .sheet { grid-template-columns: 1fr; } }
+@media (max-width: 860px) { .sheet { grid-template-columns: 1fr; } .sheet > .panel { grid-column: 1 / -1 !important; } .certs { grid-template-columns: 1fr !important; } }
 
 footer { border-top: var(--line); padding: 72px 0 80px; background: var(--ink); color: var(--paper); position: relative; overflow: hidden; }
 footer::before { content: ""; position: absolute; inset: 0; background: repeating-conic-gradient(from 0deg at 88% 40%, var(--paper) 0deg 0.8deg, transparent 0.8deg 6deg); opacity: 0.1; -webkit-mask: radial-gradient(circle at 88% 40%, transparent 0 70px, #000 300px); mask: radial-gradient(circle at 88% 40%, transparent 0 70px, #000 300px); }
